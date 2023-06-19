@@ -7,9 +7,6 @@ from selenium import webdriver
 import re
 from selenium.webdriver.chrome.options import Options
 import time
-#from selenium.webdriver.common.by import By
-#from selenium.webdriver.common.keys import Keys
-#import chromedriver_binary
 
 class parseUrl:
     def __init__(self, *args):
@@ -20,7 +17,7 @@ class parseUrl:
     def selenium(self,url):
 
         try:
-            time_s = time.time()
+            #time_s = time.time()
             
             fname = re.sub("[\:\/\.]","_",url) + ".txt"
             if os.path.isfile(fname):
@@ -29,17 +26,16 @@ class parseUrl:
             else:
                 opt = Options()
                 opt.add_argument("--headless") # headless mode
-                #driver = webdriver.Edge(options = opt,executable_path='/Users/jp29130/Documents/codes/common/msedgedriver')
-                driver = webdriver.Edge(executable_path='/Users/jp29130/Documents/codes/common/msedgedriver')
+                driver = webdriver.Edge(executable_path='./msedgedriver') # locate appropriate webdriver in the executable-file directory
                 driver.get(url)
                 time.sleep(10)
                 bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
                 #print(driver.page_source)
                 with open(fname, mode='w') as f:
                     f.write(str(bs.prettify()))
-            time_e = time.time()
-            etime = time_e - time_s
-            print("elapsed time: {0:.2f}".format(etime))
+            #time_e = time.time()
+            #etime = time_e - time_s
+            #print("elapsed time: {0:.2f}".format(etime))
         except driver.exceptions.RequestException as e:
             print("Error: ",e)
         finally:
@@ -83,30 +79,6 @@ class parseUrl:
                 except:
                     print(f'failed:{line}')
                     print(titles[ii-1].get_text())
-        """
-        ii = 0
-        for line in ddlines:
-            contentline = line.get_text()
-            contentline = re.sub('[^A-z,][\s\n]+','',contentline)
-            contentline = re.sub('\n','',contentline)
-            if contentline[0:5] == '[pdf]':
-                pass
-            elif re.search('[Bb]ack$',contentline):
-                pass
-            elif re.search('[Bb]ack\]*$',contentline):
-                pass
-            else:
-                author.append(re.split(',',contentline))
-                try:
-                    title.append(titles[ii].get_text())
-                    ii += 1
-                except:
-                    print(f'failed:{contentline}')
-                    print(titles[ii-1].get_text())
-        """
-        
-        #for ii in range(0,len(titles)):
-        #    print(author[ii],titles[ii])
         normal = 1
         return normal, author, title
 
@@ -163,7 +135,6 @@ class parseUrl:
         sects = bs.find_all('tr',{'class':'pHdr'})
         for sect in sects:
             session = sect.find('a').get_text()
-            #if url[0]==2022:
             if re.search("(MoB-PO)|(TuC-PO)",session):
                 continue
             elif re.search("(MoAmPo)|(MoPmPo)|(TuAmPo)|(TuPmPo)|(WeAmPo)|(WePmPo)",session):
@@ -179,7 +150,6 @@ class parseUrl:
                 continue
                 
             ttl = re.sub('\s\(.+','',ttl)
-            #print(ttlidx, ':', session, '\t', ttl)
             ttlidx += 1
             title.append(ttl)
             
@@ -209,5 +179,36 @@ class parseUrl:
         normal = True
 
         return normal, title, author
+    
+    def IEEERAS(self,url):
+        normal = False
+        author = []
+        title = []
+        maxpages = 100
+        for ii in range(1,maxpages):
+            #url = 'https://ieeexplore.ieee.org/xpl/conhome/9811522/proceeding?isnumber=9811357&sortType=vol-only-seq&pageNumber='
 
+            turl=f'{url}{ii}'
+            print(turl)
+            bs = self.selenium(turl)
+            noresult = bs.find_all('li',{'class':'article-list-item no-results'})
+            if noresult:
+                break
+            
+            blks = bs.find_all('div',{'class':'col result-item-align px-3'})
+            for blk in blks:
+                aublk = blk.find('p',{'class':'author text-base-md-lh'})
+                if aublk:
+                    ttl = re.sub('^\s+|[\n\t]','',blk.find('h2').get_text())
+                    ttl = re.sub('\s*$','',ttl)
+                    authors = re.sub('^\s+|[\n\t]','',aublk.get_text())
+                    authors = re.sub('\s+;\s+',',',authors)
+                    authors = re.sub('\s*$','',authors)
+                    author.append(re.split(',',authors))
+                    title.append(ttl)
+        
+        normal = True
+
+        return normal, title, author
+ 
 
