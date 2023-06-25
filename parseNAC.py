@@ -3,16 +3,16 @@
 import re
 
 
-class parseATlist:
+class parseNAClist:
     def __init__(self, *args):
-        if len(args) == 1:
+        if len(args) <= 2:
             print('parseATlist should be initialized with at least two parameters')
-        elif len(args) ==2:
-            self.num_papers = len(args[0])
-            self.title_list = args[0]
-            self.author_list = args[1]
+        elif len(args) == 3:
+            self.name_list = args[0]
+            self.aff_list = args[1]
+            self.cite_list = args[2]
         else:
-            print('too many parameters for initialization')
+            print('too many inputs for initialization')
         self.sjppat="^([AIUEO]|[BGKMNPR][aiueoAIUEO]|[BGKMNPR][yY][auoAUO]|D[aeoAEO]|S[aueoAUEO]|S[hH][aiouAIOU]|T[aeoAEO]|T[sS][uU]|Z[aueoAUEO]|Y[auoAUO]|\
 H[aieoAIEO]|HY[auoAUO]|J[aiuoAIUO]|J[y][auoAUO]|C[hH][aiuoAIUO]|D[aeoAEO]|W[aA]|F[uU])\
 ([\s'nmhtkNMHTK]|[aiueoAIUEO]|([bgkmnprBGKMNPR]|[kK][kK]|[mM][mM]|[nN][nN]|[pP][pP])[aiueoAIUEO]|([bgkmnprBGKMNPR]|[kK][kK]|[mM][mM]|[nN][nN]|\
@@ -59,8 +59,6 @@ Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yue|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zou)
             if not re.search(self.snjpwpat,name):#non-jp-like
                 if not re.search(self.snjppat,name):#non-jp name
                     ret = True
-                #else:
-                #    print(f'non jp name: {name}')
         return ret
     
     def isJPlike(self,name):
@@ -94,70 +92,35 @@ Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yue|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zou)
         return ret
 
     def selectJP(self):
-        jpauthor = []
-        jptitle = []
-        numjppaper = 0
-        numallauthors = 0
-        numjpauthors = 0
-        numallpapers = len(self.title_list)
+        jpname = []
+        jpaff = []
+        jpcite = []
+        numjp = 0
+
         
-        for ii in range(0,self.num_papers):
-            ttl = self.title_list[ii]
+        for ii in range(0,len(self.name_list)):
             jpp = False
-            for au in self.author_list[ii]:
-                numallauthors += 1
-                if self.isJPlike(au):
-                    aus = re.split('\s',au)
-                    if len(aus) == 2:
-                        if self.isJPgiven(aus[0]):
-                            if self.isJPfamily(aus[1]):
-                                if self.isJPname(au):
-                                    numjpauthors += 1
-                                    jpauthor.append(au)
-                                    jptitle.append(ttl)
-                                    jpp = True
-                    elif len(aus) == 3:
-                        if self.isJPgiven(aus[0]):
-                            if self.isJPfamily(aus[2]):
-                                if self.isJPname(au):
-                                    numjpauthors += 1
-                                    jpauthor.append(au)
-                                    jptitle.append(ttl)
-                                    jpp = True
+            name = self.name_list[ii]
+            if self.isJPlike(name):
+                names = re.split('\s',name)
+                if len(names) == 2:
+                    if self.isJPgiven(names[0]):
+                        if self.isJPfamily(names[1]):
+                            if self.isJPname(name):
+                                numjp += 1
+                                jpname.append(name)
+                                jpaff.append(self.aff_list[ii])
+                                jpcite.append(self.cite_list[ii])
+                                jpp = True
+                elif len(names) == 3:
+                    if self.isJPgiven(names[0]):
+                        if self.isJPfamily(names[2]):
+                            if self.isJPname(name):
+                                numjp += 1
+                                jpname.append(name)
+                                jpaff.append(self.aff_list[ii])
+                                jpcite.append(self.cite_list[ii])
+                                jpp = True
 
-            if jpp:
-                numjppaper += 1
-                
-        return jpauthor, jptitle, numallauthors, numjpauthors, numallpapers, numjppaper
-
-    def makehist(self,authors,yr):
-        """make a histgram consisting of author x yr dictionary """
-        hist = {}
-        for author in authors:
-            if author in hist.keys():
-                if yr in hist[author].keys():
-                    hist[author][yr] += 1
-                else:
-                    hist[author][yr] = 1
-            else:
-                hist[author] = {yr:1}
-        return hist
-    
-    def mergehist(self,histall,hist,yr):
-        if histall == {}:
-            histall = hist
-        else:
-            for author in hist.keys():
-                if author in histall.keys():
-                    if yr in histall[author].keys():
-                        histall[author][yr] += hist[author][yr]
-                    else:
-                        histall[author][yr] = hist[author][yr]
-                else:
-                    histall[author] = {yr:hist[author][yr]}
-
-        return histall
-    
-
-
+        return jpname, jpaff, jpcite, numjp
 

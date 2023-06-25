@@ -2,11 +2,12 @@
 # coding: utf-8
 import os
 import requests
+import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
-import re
 from selenium.webdriver.chrome.options import Options
-import time
+from selenium.webdriver.common.by import By
+import re
 
 class parseUrl:
     def __init__(self, *args):
@@ -211,4 +212,40 @@ class parseUrl:
 
         return normal, title, author
  
+    def Gscholar(self):
+        normal = False
+        name = []
+        aff = []
+        citation = []
+        url = self.site
+        stime = 2
+
+        opt = Options()
+        opt.add_argument("--headless") # headless mode
+
+        for ii in range(0,100):
+            if ii == 0:
+                driver = webdriver.Edge(executable_path='./msedgedriver') # locate appropriate webdriver in the executable-file directory
+                driver.get(url)
+                time.sleep(stime)
+                bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
+            else:
+                a_item = driver.find_element(By.CSS_SELECTOR, '[aria-label="次へ"]')
+                a_item.click()
+                time.sleep(stime)
+                bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
+            fname = re.sub("[\:\/\.]","_",url) + "_" + str(ii) + ".txt"
+            with open(fname, mode='w') as f:
+                f.write(str(bs.prettify()))
+            names = bs.find_all('h3',{'class':'gs_ai_name'})
+            affs = bs.find_all('div',{'class':'gs_ai_aff'})
+            cits = bs.find_all('div',{'class':'gs_ai_cby'})
+            for jj in range(0,len(names)):
+                name.append(re.sub('\s\(.+?\)|\s\(.+?）|\s（.+?）','',names[jj].get_text()))
+                aff.append(affs[jj].get_text())
+                citation.append(int(re.sub('被引用数: ','',cits[jj].get_text())))
+        
+        normal = True
+
+        return normal, name, aff, citation
 
