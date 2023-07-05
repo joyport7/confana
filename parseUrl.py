@@ -219,11 +219,12 @@ class parseUrl:
         citation = []
         url = self.site
         stime = 2
+        maxpage = 500
 
         opt = Options()
         opt.add_argument("--headless") # headless mode
 
-        for ii in range(0,100):
+        for ii in range(0,maxpage):
             if ii == 0:
                 driver = webdriver.Edge(executable_path='./msedgedriver') # locate appropriate webdriver in the executable-file directory
                 driver.get(url)
