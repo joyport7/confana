@@ -6,6 +6,7 @@ import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+#from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.by import By
 import re
 
@@ -14,26 +15,28 @@ class parseUrl:
         if len(args)==2:
             self.site = args[0]
             self.conf = args[1]
-    
+
     def selenium(self,url):
 
         try:
             #time_s = time.time()
-            
-            fname = re.sub("[\:\/\.]","_",url) + ".txt"
-            if os.path.isfile(fname):
-                with open(fname, encoding='utf-8') as f:
-                    bs = BeautifulSoup(f.read(), 'html.parser')
-            else:
-                opt = Options()
-                opt.add_argument("--headless") # headless mode
-                driver = webdriver.Edge(executable_path='./msedgedriver') # locate appropriate webdriver in the executable-file directory
-                driver.get(url)
-                time.sleep(10)
-                bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
+            #fname = re.sub("[\:\/\.]","_",url) + ".txt"
+            #if os.path.isfile(fname):
+            #    with open(fname, encoding='utf-8') as f:
+            #        bs = BeautifulSoup(f.read(), 'html.parser')
+            #else:
+            chopt = Options()
+            chopt.add_argument("--headless") # headless mode
+            #egopt = Options()
+            #egopt.add_argument('headless')
+            #driver = webdriver.Edge(executable_path='./msedgedriver',options=egopt) # locate appropriate webdriver in the executable-file directory
+            driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
+            driver.get(url)
+            time.sleep(10)
+            bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
                 #print(driver.page_source)
-                with open(fname, mode='w') as f:
-                    f.write(str(bs.prettify()))
+            #    with open(fname, mode='w') as f:
+            #        f.write(str(bs.prettify()))
             #time_e = time.time()
             #etime = time_e - time_s
             #print("elapsed time: {0:.2f}".format(etime))
@@ -202,9 +205,8 @@ class parseUrl:
                 if aublk:
                     ttl = re.sub('^\s+|[\n\t]','',blk.find('h2').get_text())
                     ttl = re.sub('\s*$','',ttl)
-                    authors = re.sub('^\s+|[\n\t]','',aublk.get_text())
+                    authors = aublk.get_text().strip()
                     authors = re.sub('\s+;\s+',',',authors)
-                    authors = re.sub('\s*$','',authors)
                     author.append(re.split(',',authors))
                     title.append(ttl)
         
@@ -217,36 +219,94 @@ class parseUrl:
         name = []
         aff = []
         citation = []
-        url = self.site
-        stime = 2
-        maxpage = 500
+        ourl = self.site
+        stime = 10
+        maxpage = 1000
 
         opt = Options()
         opt.add_argument("--headless") # headless mode
 
+        bRet = False
         for ii in range(0,maxpage):
-            if ii == 0:
-                driver = webdriver.Edge(executable_path='./msedgedriver') # locate appropriate webdriver in the executable-file directory
-                driver.get(url)
-                time.sleep(stime)
-                bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
+            fname = re.sub("[\:\/\.]","_",ourl) + "_" + str(ii) + ".txt"
+            if os.path.isfile(fname):
+                with open(fname, encoding='utf-8') as f:
+                    bs = BeautifulSoup(f.read(), 'html.parser')
+                    #onclick="window.location='/citations?view_op\x3dsearch_authors\x26hl\x3dja\x26mauthors\x3dlabel:computer_vision\x26after_author\x3d-2cKAHD2__8J\x26astart\x3d4110'" type="button">
+                tmp = bs.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
+                url = re.sub('window\.location=|\'','',tmp['onclick'])
+                url = re.sub('\\\\x3d','=',url)
+                url = re.sub('\\\\x26','&',url)
+                url = 'https://scholar.google.jp' + url
+                bRet = True
             else:
-                a_item = driver.find_element(By.CSS_SELECTOR, '[aria-label="次へ"]')
-                a_item.click()
-                time.sleep(stime)
-                bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
-            fname = re.sub("[\:\/\.]","_",url) + "_" + str(ii) + ".txt"
-            with open(fname, mode='w') as f:
-                f.write(str(bs.prettify()))
+                if ii == 0:
+                    url = ourl 
+                if bRet or ii == 0:
+                    chopt = Options()
+                    chopt.add_argument("--headless") # headless mode
+                    driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
+                    #driver = webdriver.Edge(executable_path='./msedgedriver') # locate appropriate webdriver in the executable-file directory
+                    driver.get(url)
+                    time.sleep(stime)
+                    bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
+                    tmp = bs.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
+                    url = re.sub('window\.location=|\'','',tmp['onclick'])
+                    url = re.sub('\\\\x3d','=',url)
+                    url = re.sub('\\\\x26','&',url)
+                    url = 'https://scholar.google.jp' + url
+                    bRet = True
+                    with open(fname, mode='w') as f:
+                        f.write(str(bs.prettify()))
+                else:
+                    a_item = driver.find_element(By.CSS_SELECTOR, '[aria-label="次へ"]')
+                    a_item.click()
+                    time.sleep(stime)
+                    bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
+                    with open(fname, mode='w') as f:
+                        f.write(str(bs.prettify()))
+                    bRet = False
             names = bs.find_all('h3',{'class':'gs_ai_name'})
             affs = bs.find_all('div',{'class':'gs_ai_aff'})
             cits = bs.find_all('div',{'class':'gs_ai_cby'})
             for jj in range(0,len(names)):
-                name.append(re.sub('\s\(.+?\)|\s\(.+?）|\s（.+?）','',names[jj].get_text()))
-                aff.append(affs[jj].get_text())
+                name.append(re.sub('\n|\s\(.+?\)|\(.+?\)|\s\(.+?）|\s（.+?）|（.+?）$','',names[jj].get_text().strip()))
+                af = affs[jj].get_text().strip()
+                af = re.sub('.*Professor.*, |.*Professor.* of .+?, |.*Professor.* of |, .*Professor|\s*\(.+?\)\s*|.+? at |.*Scientist, |.*Researcher, |.*Engineering, |.*Science, |Group, |.*Robotics, |.*Vision, |, CEO|, Founder','',af).strip()
+                aff.append(af)
                 citation.append(int(re.sub('被引用数: ','',cits[jj].get_text())))
         
         normal = True
-
         return normal, name, aff, citation
 
+    def GscholarInd(self, nmlist):
+        normal = False
+        nmindcite = {}
+
+        for nm in nmlist:
+            nmindcite[nm] = 0
+
+            gfname = re.split('\s',nm)
+            cname = f'{gfname[0][0]} {gfname[1]}'
+
+            url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}&btnG='
+            bs = self.selenium(url)
+
+            nmpart = bs.find('h3',{'class':'gs_ai_name'})
+            linksuf = nmpart.find('a').get('href')
+
+            url = f'https://scholar.google.jp{linksuf}'
+            print(f'{nm}: {url}')
+            bs = self.selenium(url)
+
+            cpart = bs.find('div',{'class':'gsc_lcl gsc_prf_pnl'})
+            pubs = cpart.find_all('tr',{'class':'gsc_a_tr'})
+            for pub in pubs:
+                npart = pub.find('div',{'class':'gs_gray'}).get_text().strip()
+                if re.match(cname,npart):
+                    tmp = pub.find('td',{'class':'gsc_a_c'}).get_text().strip()
+                    nmindcite[nm] = int(re.search('^([0-9]+)$',tmp).group())
+                    break
+
+        normal = True
+        return normal, nmindcite
