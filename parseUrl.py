@@ -16,30 +16,30 @@ class parseUrl:
             self.site = args[0]
             self.conf = args[1]
 
-    def selenium(self,url):
+    def selenium(self,url,fname):
 
         try:
             #time_s = time.time()
             #fname = re.sub("[\:\/\.]","_",url) + ".txt"
-            #if os.path.isfile(fname):
-            #    with open(fname, encoding='utf-8') as f:
-            #        bs = BeautifulSoup(f.read(), 'html.parser')
-            #else:
-            chopt = Options()
-            chopt.add_argument("--headless") # headless mode
-            #egopt = Options()
-            #egopt.add_argument('headless')
-            #driver = webdriver.Edge(executable_path='./msedgedriver',options=egopt) # locate appropriate webdriver in the executable-file directory
-            driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
-            driver.get(url)
-            time.sleep(10)
-            bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
+            if os.path.isfile(fname):
+                with open(fname, encoding='utf-8') as f:
+                    bs = BeautifulSoup(f.read(), 'html.parser')
+            else:
+                chopt = Options()
+                chopt.add_argument("--headless") # headless mode
+                #egopt = Options()
+                #egopt.add_argument('headless')
+                #driver = webdriver.Edge(executable_path='./msedgedriver',options=egopt) # locate appropriate webdriver in the executable-file directory
+                driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
+                driver.get(url)
+                time.sleep(10)
+                bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
                 #print(driver.page_source)
-            #    with open(fname, mode='w') as f:
-            #        f.write(str(bs.prettify()))
-            #time_e = time.time()
-            #etime = time_e - time_s
-            #print("elapsed time: {0:.2f}".format(etime))
+                with open(fname, mode='w') as f:
+                    f.write(str(bs.prettify()))
+                #time_e = time.time()
+                #etime = time_e - time_s
+                #print("elapsed time: {0:.2f}".format(etime))
         except driver.exceptions.RequestException as e:
             print("Error: ",e)
         finally:
@@ -193,8 +193,9 @@ class parseUrl:
             #url = 'https://ieeexplore.ieee.org/xpl/conhome/9811522/proceeding?isnumber=9811357&sortType=vol-only-seq&pageNumber='
 
             turl=f'{url}{ii}'
+            fname = re.sub("[\:\/\.]","_",turl) + ".txt"
             print(turl)
-            bs = self.selenium(turl)
+            bs = self.selenium(turl,fname)
             noresult = bs.find_all('li',{'class':'article-list-item no-results'})
             if noresult:
                 break
@@ -290,14 +291,16 @@ class parseUrl:
             cname = f'{gfname[0][0]} {gfname[1]}'
 
             url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}&btnG='
-            bs = self.selenium(url)
+            fname = re.sub("[\:\/\.]","_",url) + ".txt"
+            bs = self.selenium(url,fname)
 
             nmpart = bs.find('h3',{'class':'gs_ai_name'})
             linksuf = nmpart.find('a').get('href')
 
             url = f'https://scholar.google.jp{linksuf}'
+            fname = re.sub("[\:\/\.]","_",url) + ".txt"
             print(f'{nm}: {url}')
-            bs = self.selenium(url)
+            bs = self.selenium(url,fname)
 
             cpart = bs.find('div',{'class':'gsc_lcl gsc_prf_pnl'})
             pubs = cpart.find_all('tr',{'class':'gsc_a_tr'})
