@@ -29,7 +29,7 @@ H[aieoAIEO]|HY[auoAUO]|J[aiuoAIUO]|J[y][auoAUO]|C[hH][aiuoAIUO]|D[aeoAEO]|W[aA]|
 Aakanksha|Aa*ron|Akanksha|Amanda|Ameya|Ami[tn]|Anita|Anki|Ankita|Annika|Anton|Antoin|Antonio|Anuja|Aran|Arya|Arun|Aida|Aren|Arezou|Aria|Aryan|Ata|\
 Bao|Babak|Bee|Beibei|Benjamin|Bodo|Bojan|Burak|Bukun|Burin|\
 Chaehun|Chajin|Chanjin|Chau|Chiara|Da|Dakai|Dami[ae]n|Dann*a|Dario|Debora|Depanshu|Dohwan|Dominik|Dongoh|Doreen|Doron|\
-Erik|Ehsan|Eshaan|Eugene|Eze|Gene|Gyumin|Haechan|Haian|Han|Hanbin|Hani|Hanna|Hannah|Hasan|Heiko|Henri|Hogun|\
+Erik|Ehsan|Eshaan|Eugene|Eze|Gene|Gyumin|Gunawan|Haechan|Haian|Han|Hanbin|Hani|Hanna|Hannah|Hasan|Heiko|Henri|Hogun|\
 Inkyu|Itai|Isha|Jamie|Jan|Jane|Janne|Jason|Jikai|Jimin|Jirak|Jose|John|Joao|Joni|Ju|Junni|Juho|Juhee|Junho|Junhyuk|\
 Kaan|Kannan|Kanika|K[ai]ran|Kate|Kenan|Kenneth|Kiana|Kien|Koushik|Leda|Lorenzo|\
 Maatei|Madonna|Mainak|Man|Manikanta|Marion|Masha|Matan|Mateja|Matt|Mayank|Mazen|Meena|Meike|Menoua|Miao|Mihai|Min|Minho*|Minji|Min[jJ]oon|Min[jJ]un*|Minsu|Minkyo|Mubarak|Mohi|Monika|Moon|Moonsoo|Moran|\
@@ -39,7 +39,7 @@ Sachin|Sage|Sanchari|Saikat|Sandaru|Sami|Samitha|Samira|Sarah|Sayan|Sean|Seba|Se
 Udana|Wah|Yan|Yani|Yanrui|Yangyu|Yaochu|Yasaman|Yohan|Yuanbiao|Yue|Yun|Yunmo|Yuru|Yunhao|Zarena|Zarana|Zerui|Zeyu)"
         self.snjpfpat="\
 ((Ch|N)a|(Ch|Sh|[YSHFOLGMB])[uo]|[YSHFOLGMKZ]e|[EH]o|An|([TYHGW]|[BDL]|Shu)ai|[BGHYMR]ao|([YRG]u|Ch|[LYHTWGNM])an|[BNJ]i|Jia|[JM]iao|[GS]ui|[YS]un|[KGZ]uo|[LM]ei|Heo|[YH]ou|Choi|Yoo|Yoon|\
-Aakanksha|Achan|Arora|Ahuja|Aksak|Akshara|Amani|Amini|Amit|Amin|Antebi|Aran|Aryan|\
+Aakanksha|Achan|Arora|Ahuja|Aksak|Akshara|Amani|Amini|Amit|Amin|Antebi|Aran|Ariyanto|Aryan|\
 Badea|Basu|Bilen|Bahadori|Bandara|Bauza|Ben|Benton|Benjamin|Benson|Bera|Bian|Bin|Bok|Boneh|Bouma|Bouman|Bui|Chai|Cho[ou]|Chi|Desai|Dami[ae]n|Damaine|Dewan|Do|Dorent|Eak|Egiazarian|Emonet|Esen|Gat|Gia|Gianchandani|Gu|Guha|Guhan|Guedon|\
 Ha|Hakimi|Hanna|Hansen|Heidari|Himayat|Huh|Hui|Huo|Ho|Ie|Imani|Jagadeesan|Jain|Jaipuria|Jamnik|Janda|Jansen|Jayasuriya|Juge|John|Johnson|Joo|Joshi|Ju|Junge|\
 Kahn|Kahnsari|Kate|Kazemi|Kee|Keshishian|Khurana|Ki|Kiani|Kijak|Kishore|Koren|Koo|Kunze|\
