@@ -188,7 +188,7 @@ class parseUrl:
         normal = False
         author = []
         title = []
-        maxpages = 100
+        maxpages = 1000
         for ii in range(1,maxpages):
             #url = 'https://ieeexplore.ieee.org/xpl/conhome/9811522/proceeding?isnumber=9811357&sortType=vol-only-seq&pageNumber='
 
@@ -222,7 +222,7 @@ class parseUrl:
         citation = []
         ourl = self.site
         stime = 10
-        maxpage = 1000
+        maxpage = 1500
 
         opt = Options()
         opt.add_argument("--headless") # headless mode
@@ -288,9 +288,13 @@ class parseUrl:
             nmindcite[nm] = 0
 
             gfname = re.split('\s',nm)
-            cname = f'{gfname[0][0]} {gfname[1]}'
+            if len(gfname)==2:
+                cname = f'{gfname[0][0]} {gfname[1]}'
+                url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}&btnG='
+            elif len(gfname)==3:
+                cname = f'{gfname[0][0]}{gfname[1][0]} {gfname[2]}'
+                url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}+{gfname[2]}&btnG='
 
-            url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}&btnG='
             fname = re.sub("[\:\/\.]","_",url) + ".txt"
             bs = self.selenium(url,fname)
 
@@ -308,7 +312,10 @@ class parseUrl:
                 npart = pub.find('div',{'class':'gs_gray'}).get_text().strip()
                 if re.match(cname,npart):
                     tmp = pub.find('td',{'class':'gsc_a_c'}).get_text().strip()
-                    nmindcite[nm] = int(re.search('^([0-9]+)$',tmp).group())
+                    try:
+                        nmindcite[nm] = int(re.search('^([0-9]+)',tmp).group())
+                    except:
+                        print(tmp)
                     break
 
         normal = True

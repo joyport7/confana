@@ -29,7 +29,7 @@ H[aieoAIEO]|HY[auoAUO]|J[aiuoAIUO]|J[y][auoAUO]|C[hH][aiuoAIUO]|D[aeoAEO]|W[aA]|
 Aakanksha|Aa*ron|Akanksha|Amanda|Ameya|Ami[tn]|Anita|Anki|Ankita|Annika|Anton|Antoin|Antonio|Anuja|Aran|Arya|Arun|Aida|Aren|Arezou|Aria|Aryan|Ata|\
 Bao|Babak|Bee|Beibei|Benjamin|Bodo|Burak|Bukun|Burin|\
 Chaehun|Chajin|Chanjin|Chau|Chiara|Da|Dakai|Dami[ae]n|Dann*a|Dario|Debora|Depanshu|Dohwan|Dominik|Dongoh|Doreen|Doron|\
-Erik|Ehsan|Eshaan|Eugene|Gene|Gyumin|Haechan|Haian|Han|Hanbin|Hani|Hanna|Hannah|Hasan|Heiko|Hogun|\
+Erik|Ehsan|Eshaan|Eugene|Eze|Gene|Gyumin|Haechan|Haian|Han|Hanbin|Hani|Hanna|Hannah|Hasan|Heiko|Hogun|\
 Inkyu|Itai|Isha|Jamie|Jan|Jane|Janne|Jason|Jikai|Jimin|Jirak|Jose|John|Joao|Joni|Ju|Junni|Juho|Juhee|Junho|Junhyuk|\
 Kaan|Kannan|Kanika|K[ai]ran|Kate|Kenan|Kenneth|Kiana|Kien|Koushik|Leda|Lorenzo|\
 Maatei|Madonna|Mainak|Man|Manikanta|Marion|Masha|Matan|Mateja|Matt|Mazen|Meena|Meike|Menoua|Miao|Mihai|Min|Minho*|Minji|Min[jJ]oon|Min[jJ]un*|Minsu|Minkyo|Mubarak|Mohi|Monika|Moon|Moran|\
@@ -40,7 +40,7 @@ Udana|Wah|Yan|Yani|Yanrui|Yangyu|Yaochu|Yasaman|Yohan|Yuanbiao|Yue|Yun|Yunmo|Yur
         self.snjpfpat="\
 ((Ch|N)a|(Ch|Sh|[YSHFOLGMB])[uo]|[YSHFOLGMKZ]e|[EH]o|An|([TYHGW]|[BDL]|Shu)ai|[BGHYMR]ao|([YRG]u|Ch|[LYHTWGNM])an|[BNJ]i|Jia|[JM]iao|[GS]ui|[YS]un|[KGZ]uo|[LM]ei|Heo|[YH]ou|Choi|Yoo|Yoon|\
 Aakanksha|Achan|Arora|Ahuja|Aksak|Akshara|Amani|Amini|Amit|Amin|Antebi|Aran|Aryan|\
-Badea|Basu|Bilen|Bahadori|Bandara|Ben|Benton|Benjamin|Bera|Bian|Bin|Bok|Boneh|Bouman|Bui|Chai|Cho[ou]|Chi|Desai|Dami[ae]n|Damaine|Dewan|Do|Dorent|Eak|Egiazarian|Emonet|Esen|Gat|Gia|Gu|Guha|Guhan|Guedon|\
+Badea|Basu|Bilen|Bahadori|Bandara|Ben|Benton|Benjamin|Benson|Bera|Bian|Bin|Bok|Boneh|Bouman|Bui|Chai|Cho[ou]|Chi|Desai|Dami[ae]n|Damaine|Dewan|Do|Dorent|Eak|Egiazarian|Emonet|Esen|Gat|Gia|Gu|Guha|Guhan|Guedon|\
 Ha|Hakimi|Hanna|Hansen|Heidari|Himayat|Huh|Hui|Huo|Ho|Ie|Imani|Jagadeesan|Jain|Jaipuria|Jamnik|Janda|Jansen|Jayasuriya|Juge|John|Johnson|Joo|Joshi|Ju|Junge|\
 Kahn|Kahnsari|Kate|Kee|Keshishian|Khurana|Ki|Kiani|Kijak|Kishore|Koren|Koo|Kunze|\
 Laina|Ma|Madan|Maiya|Maman|Mania|Mangoubi|Mannone|Masera|Mason|Masoomi|Mazaheri|Min|Mingyu|Miolane|Miranda|Memari|Men|Mohan|Mok|Monteiro|Moore|\
