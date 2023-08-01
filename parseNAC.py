@@ -26,7 +26,7 @@ H[aieoAIEO]|HY[auoAUO]|J[aiuoAIUO]|J[y][auoAUO]|C[hH][aiuoAIUO]|D[aeoAEO]|W[aA]|
 [bdfghjklmpqrvwxyzBCDFGHJKLMPQRTVWXYZ][bcdfgjklmpqrtvwxz]|c[^h]|[tT][^aeos]|s[^aueoh]|[sS]h[^aiuo]|[tT]s[^u]|[in]h$|[jJ]as"
         self.snjpgpat="\
 (([JN]|Sh|Ch)i|Bin|[GKd]e|Bo|Hai|[TH]ao|Bei|Ku[in]|\
-Aakanksha|Aa*ron|Akanksha|Amanda|Ameya|Ami[tn]|Anita|Anki|Ankita|Annika|Anton|Antoin|Antonio|Anuja|Aran|Arya|Arun|Aida|Aren|Arezou|Aria|Aryan|Ata|\
+Aakanksha|Aa*ron|Akanksha|Amanda|Ameya|Ami[tn]|Anita|Anki|Ankita|Annika|Anton|Antoine*|Antonio|Anuja|Aran|Arya|Arun|Aida|Aren|Arezou|Aria|Aryan|Ata|\
 Bao|Babak|Bee|Beibei|Benjamin|Bodo|Bojan|Burak|Bukun|Burin|\
 Chaehun|Chajin|Chanjin|Chau|Chiara|Da|Dakai|Dami[ae]n|Dann*a|Dario|Debora|Depanshu|Dohwan|Dominik|Dongoh|Doreen|Doron|\
 Erik|Ehsan|Eshaan|Eugene|Eze|Gene|Gyumin|Gunawan|Haechan|Haian|Han|Hanbin|Hani|Hanna|Hannah|Hasan|Heiko|Henri|Hogun|\
@@ -35,7 +35,7 @@ Kaan|Kannan|Kanika|K[ai]ran|Kate|Kenan|Kenneth|Kiana|Kien|Koushik|Leda|Lorenzo|\
 Maatei|Madonna|Mainak|Man|Manikanta|Marion|Masha|Matan|Mateja|Matt|Mayank|Mazen|Meena|Meike|Menoua|Miao|Mihai|Min|Minho*|Minji|Min[jJ]oon|Min[jJ]un*|Minsu|Minkyo|Mubarak|Mohi|Monika|Moon|Moonsoo|Moran|\
 Nageen|Namo|Neha|Nikita|Nima|Nirat|Nooshin|\
 Oren|Ori|Oladayo|Osama|Oya|Pere|Pouya|Pu|Ramana|Rami|Ranjan|Renshuai|Reuben|Reza|Rishi|Ruben|Rohit|Roi|Ruwan|Ruhi|Ryan|\
-Sachin|Sage|Sanchari|Saikat|Sandaru|Sami|Samitha|Samira|Sarah|Sayan|Sean|Seba|Sek|Sen|Shaurya|Shasha|Shayak|Shayan|Shai|Shichao|Shishira|Shujon|Soomin|Suman|Suranjana|Suren|Sunita|Taha|Taman|Tanaya|Tapani|Tarasha|\
+Sachin|Sage|Sanchari|Saikat|Sandaru|Sami|Samitha|Samira|Sarah|Sayan|Sean|Seba|Sek|Sen|Shagan|Shaurya|Shasha|Shayak|Shayan|Shai|Shichao|Shishira|Shujon|Soomin|Suman|Suranjana|Suren|Sunita|Taha|Taman|Tanaya|Tapani|Teresa|Tarasha|\
 Udana|Wah|Yan|Yani|Yanrui|Yangyu|Yaochu|Yasaman|Yohan|Yuanbiao|Yue|Yun|Yunmo|Yuru|Yunhao|Zarena|Zarana|Zerui|Zeyu)"
         self.snjpfpat="\
 ((Ch|N)a|(Ch|Sh|[YSHFOLGMB])[uo]|[YSHFOLGMKZ]e|[EH]o|An|([TYHGW]|[BDL]|Shu)ai|[BGHYMR]ao|([YRG]u|Ch|[LYHTWGNM])an|[BNJ]i|Jia|[JM]iao|[GS]ui|[YS]un|[KGZ]uo|[LM]ei|Heo|[YH]ou|Choi|Yoo|Yoon|\
@@ -43,12 +43,12 @@ Aakanksha|Achan|Arora|Ahuja|Aksak|Akshara|Amani|Amini|Amit|Amin|Antebi|Aran|Ariy
 Badea|Basu|Bilen|Bahadori|Bandara|Bauza|Ben|Benton|Benjamin|Benson|Bera|Bian|Bin|Bok|Boneh|Bouma|Bouman|Bui|Chai|Cho[ou]|Chi|Desai|Dami[ae]n|Damaine|Dewan|Do|Dorent|Eak|Egiazarian|Emonet|Esen|Gat|Gia|Gianchandani|Gu|Guha|Guhan|Guedon|\
 Ha|Hakimi|Hanna|Hansen|Heidari|Himayat|Huh|Hui|Huo|Ho|Ie|Imani|Jagadeesan|Jain|Jaipuria|Jamnik|Janda|Jansen|Jayasuriya|Juge|John|Johnson|Joo|Joshi|Ju|Junge|\
 Kahn|Kahnsari|Kate|Kazemi|Kee|Keshishian|Khurana|Ki|Kiani|Kijak|Kishore|Koren|Koo|Kunze|\
-Laina|Ma|Madan|Maiya|Maman|Mania|Mangoubi|Mannone|Masera|Mason|Masoomi|Mazaheri|Min|Mingyu|Miolane|Miranda|Memari|Men|Mohan|Mok|Monteiro|Moore|\
+Laina|Ma|Madan|Maiya|Maman|Mania|Mangoubi|Mannone|Manzanera|Masera|Mason|Masoomi|Mazaheri|Min|Mingyu|Miolane|Miranda|Memari|Men|Mohan|Mok|Monteiro|Moore|\
 Nabizadeh|Narayan|Narayanan|Neeman|Nayak|Nabi|Naik|Natarajan|Naowarat|Nauta|Nichani|Nizan|Neumann|Ngo|Noh|\
 Oh|Ohana|Oza|Pai|Pajarinen|Pan|Parekh|Pateraki|Pei|Pepik|Podee|Popa|Poranne|Pore|Poria|Potapenko|Potechin|Pu|Puri|\
 Ra|Rai|Raja|Rajan|Rajawat|Rakhsha|Ramamohanarao|Ramyaa|Ran|Rana|Rane|Rau|Raket|Rakshit|Razazadeh|Razaei|Razani|Razaei|Rohani|Reinke|Ren|Riba|Ridao|Roh|Rouhani|Ruta|Ruben|Ryu|\
-Sabo|Saria|Saporito|Saenko|Saha|Sain|Saini|Samano|Samangouei|Samanta|Samara.+?|Saket|Sani|Saran|Sarawagi|Shabanian|Shah|Shayani|Shi|Shin|Shou|Shoaran|Sohn|Souza|Suh|Sundararaman|Suri|Susan|Suin|Tandon|Tonekabori|\
-Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yue|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zou)"
+Sabo|Sah|Saria|Saporito|Saenko|Saha|Sain|Saini|Samano|Samangouei|Samanta|Samara.+?|Saket|Sani|Saran|Sarawagi|Shabanian|Shah|Shayani|Shi|Shin|Shou|Shoaran|Sohn|Souza|Suh|Sundararaman|Suri|Susan|Suin|Tandon|Tonekabori|\
+Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yue|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zontak|Zou)"
         self.snjpname="Jin\sJin|Ran\sTao|Ran\sBen|Yuhe\sJin|Jin\sTao|Yu\sTao|Jan\sKotera|Ken\sMai|Meina\sKan|Jinko\sKanno|Rui\sTao"
         self.snjppat="^"+self.snjpgpat+"\s|\s"+self.snjpfpat+"$|"+self.snjpname 
         self.dlm=",\s"
