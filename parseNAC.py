@@ -22,7 +22,7 @@ H[aieoAIEO]|HY[auoAUO]|J[aiuoAIUO]|J[y][auoAUO]|C[hH][aiuoAIUO]|D[aeoAEO]|W[aA]|
 [aA]er|ahn|[bBjJ]iao|[bB]odo|([cC]h|[bdjBDJ])ae|[cC]hoe|[eE]ui|[eE]un|eau|[fF][ieo]|[hH]ao|Hee|[hH]oai|[hH]yun|[hH]yuk|Joon|[yY]oun|guk|[jJ]ia|[hH]ua|Niu|[jJ]ie[^in]|[hkgHKG]yun|nea|\
 [sS]hui|rian|[sSgG]uo|[sS]eo[nk]|[sS]han|[sS]eung|[sS]huai|uan|\
 ([fF][yY]u)an$|\
-[rsy]ani|rini|[rR]oha|gudo|[zZ]ere|[kK]ede|[aA]hn|\
+[rsy]ani|rini|gudo|[zZ]ere|[kK]ede|[aA]hn|\
 [bdfghjklmpqrvwxyzBCDFGHJKLMPQRTVWXYZ][bcdfgjklmpqrtvwxz]|c[^h]|[tT][^aeos]|s[^aueoh]|[sS]h[^aiuo]|[tT]s[^u]|[in]h$|[jJ]as"
         self.snjpgpat="\
 (([JN]|Sh|Ch)i|Bin|[GKd]e|Bo|Hai|[TH]ao|Bei|Ku[in]|\
@@ -34,13 +34,14 @@ Inkyu|Itai|Isha|Jamie|Jan|Jane|Janne|Jason|Jikai|Jimin|Jirak|Jose|John|Joao|Joni
 Kaan|Kannan|Kanika|K[ai]ran|Kate|Kenan|Kenneth|Kiana|Kien|Koushik|Leda|Lorenzo|\
 Maatei|Madonna|Mainak|Man|Manikanta|Marion|Masha|Matan|Mateja|Matt|Mayank|Mazen|Meena|Meike|Menoua|Miao|Mihai|Min|Minho*|Minji|Min[jJ]oon|Min[jJ]un*|Minsu|Minkyo|Mubarak|Mohi|Monika|Moon|Moonsoo|Moran|\
 Nageen|Namo|Neha|Nikita|Nima|Nirat|Nooshin|\
-Oren|Ori|Oladayo|Osama|Oya|Pere|Pouya|Pu|Ramana|Rami|Ranjan|Renshuai|Reuben|Reza|Rishi|Ruben|Rohit|Roi|Ruwan|Ruhi|Ryan|\
+Okan|Oren|Ori|Oladayo|Osama|Oya|Pere|Pouya|Pu|Ramana|Rami|Ranjan|Renshuai|Reuben|Reza|Rishi|Ruben|Rohit|Roi|Ruwan|Ruhi|Ryan|\
 Sachin|Sage|Sanchari|Saikat|Sandaru|Sami|Samitha|Samira|Sarah|Sayan|Sean|Seba|Sek|Sen|Shagan|Shaurya|Shasha|Shayak|Shayan|Shai|Shichao|Shishira|Shujon|Soomin|Suman|Suranjana|Suren|Sunita|Taha|Taman|Tanaya|Tapani|Teresa|Tarasha|\
 Udana|Wah|Yan|Yani|Yanrui|Yangyu|Yaochu|Yasaman|Yohan|Yuanbiao|Yue|Yun|Yunmo|Yuru|Yunhao|Zarena|Zarana|Zerui|Zeyu)"
         self.snjpfpat="\
 ((Ch|N)a|(Ch|Sh|[YSHFOLGMB])[uo]|[YSHFOLGMKZ]e|[EH]o|An|([TYHGW]|[BDL]|Shu)ai|[BGHYMR]ao|([YRG]u|Ch|[LYHTWGNM])an|[BNJ]i|Jia|[JM]iao|[GS]ui|[YS]un|[KGZ]uo|[LM]ei|Heo|[YH]ou|Choi|Yoo|Yoon|\
 Aakanksha|Achan|Arora|Ahuja|Aksak|Akshara|Amani|Amini|Amit|Amin|Antebi|Aran|Ariyanto|Aryan|\
-Badea|Basu|Bilen|Bahadori|Bandara|Bauza|Ben|Benton|Benjamin|Benson|Bera|Bian|Bin|Bok|Boneh|Bouma|Bouman|Bui|Chai|Cho[ou]|Chi|Desai|Dami[ae]n|Damaine|Dewan|Do|Dorent|Eak|Egiazarian|Emonet|Esen|Gat|Gia|Gianchandani|Gu|Guha|Guhan|Guedon|\
+Badea|Basu|Bilen|Bahadori|Bandara|Bauza|Ben|Benton|Benjamin|Benson|Bera|Bian|Bin|Bok|Boneh|Bouma|Bouman|Bui|Chai|Cho[ou]|Chi|\
+Desai|Dami[ae]n|Damaine|Dewan|Do|Dorent|Eak|Egiazarian|Emonet|Erat|Esen|Gat|Gia|Gianchandani|Gu|Guha|Guhan|Guedon|\
 Ha|Hakimi|Hanna|Hansen|Heidari|Himayat|Huh|Hui|Huo|Ho|Ie|Imani|Jagadeesan|Jain|Jaipuria|Jamnik|Janda|Jansen|Jayasuriya|Juge|John|Johnson|Joo|Joshi|Ju|Junge|\
 Kahn|Kahnsari|Kate|Kazemi|Kee|Keshishian|Khurana|Ki|Kiani|Kijak|Kishore|Koren|Koo|Kunze|\
 Laina|Ma|Madan|Maiya|Maman|Mania|Mangoubi|Mannone|Manzanera|Masera|Mason|Masoomi|Mazaheri|Min|Mingyu|Miolane|Miranda|Memari|Men|Mohan|Mok|Monteiro|Moore|\

@@ -303,7 +303,7 @@ class parseUrl:
 
             url = f'https://scholar.google.jp{linksuf}'
             fname = re.sub("[\:\/\.]","_",url) + ".txt"
-            print(f'{nm}: {url}')
+            #print(f'{nm}: {url}')
             bs = self.selenium(url,fname)
 
             cpart = bs.find('div',{'class':'gsc_lcl gsc_prf_pnl'})
