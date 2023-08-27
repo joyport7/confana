@@ -29,26 +29,26 @@ H[aieoAIEO]|HY[auoAUO]|J[aiuoAIUO]|J[y][auoAUO]|C[hH][aiuoAIUO]|D[aeoAEO]|W[aA]|
 Aakanksha|Aa*ron|Akanksha|Amanda|Ameya|Ami[tn]|Anita|Anki|Ankita|Annika|Anton|Antoine*|Antonio|Anuja|Aran|Arya|Arun|Aida|Aren|Arezou|Aria|Aryan|Ata|\
 Bao|Babak|Bee|Beibei|Benjamin|Bodo|Bojan|Burak|Bukun|Burin|\
 Chaehun|Chajin|Chanjin|Chau|Chiara|Da|Dakai|Dami[ae]n|Dann*a|Dario|Debora|Depanshu|Dohwan|Dominik|Dongoh|Doreen|Doron|\
-Erik|Ehsan|Eshaan|Eugene|Eze|Gene|Gyumin|Gunawan|Haechan|Haian|Han|Hanbin|Hani|Hanna|Hannah|Hasan|Heiko|Henri|Hogun|\
-Inkyu|Itai|Isha|Jamie|Jan|Jane|Janne|Jason|Jikai|Jimin|Jirak|Jose|John|Joao|Joni|Ju|Junni|Juho|Juhee|Junho|Junhyuk|\
+Erik|Ehsan|Eshaan|Eugene|Ewa|Eze|Gene|Gyumin|Gunawan|Haechan|Haian|Han|Hanbin|Hani|Hanna|Hannah|Hasan|Heiko|Henri|Hogun|\
+Inkyu|Itai|Isha|Jamie|Jan|Jane|Janne|Jason|Jikai|Jimin|Jirak|Jose|John|Joao|Joko|Joni|Ju|Junni|Juho|Juhee|Junho|Junhyuk|\
 Kaan|Kannan|Kanika|K[ai]ran|Kate|Kenan|Kenneth|Kiana|Kien|Koushik|Leda|Lorenzo|\
-Maatei|Madonna|Mainak|Man|Manikanta|Marion|Masha|Matan|Mateja|Matt|Mayank|Mazen|Meena|Meike|Menoua|Miao|Mihai|Min|Minho*|Minji|Min[jJ]oon|Min[jJ]un*|Minsu|Minkyo|Mubarak|Mohi|Monika|Moon|Moonsoo|Moran|\
-Nageen|Namo|Neha|Nikita|Nima|Nirat|Nooshin|\
+Maatei|Madonna|Mainak|Man|Manikanta|Marion|Masha|Matan|Mateja|Matt|Mayank|Mazen|Masoumeh|Meena|Meike|Mengu|Menoua|Miao|Mihai|Min|Minho*|Minji|Min[jJ]oon|Min[jJ]un*|Minsu|Minkyo|Mubarak|Moein|Mohi|Mohsen|Monika|Moon|Moonsoo|Moran|Mouna|\
+Nageen|Namo|Nariman|Neha|Nikita|Nima|Nirat|Nooshin|\
 Okan|Oren|Ori|Oladayo|Osama|Oya|Pere|Pouya|Pu|Ramana|Rami|Ranjan|Renshuai|Reuben|Reza|Rishi|Ruben|Rohit|Roi|Ruwan|Ruhi|Ryan|\
-Sachin|Sage|Sanchari|Saikat|Sandaru|Sami|Samitha|Samira|Sarah|Sayan|Sean|Seba|Sek|Sen|Shagan|Shaurya|Shasha|Shayak|Shayan|Shai|Shichao|Shishira|Shujon|Soomin|Suman|Suranjana|Suren|Sunita|Taha|Taman|Tanaya|Tapani|Teresa|Tarasha|\
+Sachin|Sage|Sanchari|Saikat|Sandaru|Saman|Sami|Samitha|Samira|Sarah|Sayan|Sean|Seba|Sek|Sen|Shagan|Shaurya|Shasha|Shayak|Shayan|Shai|Shichao|Shishira|Shujon|Soomin|Suman|Suranjana|Suren|Sunita|Taha|Taman|Tanaya|Tapani|Teresa|Tarasha|\
 Udana|Wah|Yan|Yani|Yanrui|Yangyu|Yaochu|Yasaman|Yohan|Yuanbiao|Yue|Yun|Yunmo|Yuru|Yunhao|Zarena|Zarana|Zerui|Zeyu)"
         self.snjpfpat="\
 ((Ch|N)a|(Ch|Sh|[YSHFOLGMB])[uo]|[YSHFOLGMKZ]e|[EH]o|An|([TYHGW]|[BDL]|Shu)ai|[BGHYMR]ao|([YRG]u|Ch|[LYHTWGNM])an|[BNJ]i|Jia|[JM]iao|[GS]ui|[YS]un|[KGZ]uo|[LM]ei|Heo|[YH]ou|Choi|Yoo|Yoon|\
-Aakanksha|Achan|Arora|Ahuja|Aksak|Akshara|Amani|Amini|Amit|Amin|Antebi|Aran|Ariyanto|Aryan|\
+Aakanksha|Achan|Arora|Ahuja|Aksak|Akshara|Amani|Amini|Aminzadeh|Amit|Amin|Antebi|Aran|Ariyanto|Aryan|\
 Badea|Basu|Bilen|Bahadori|Bandara|Bauza|Ben|Benton|Benjamin|Benson|Bera|Bian|Bin|Bok|Boneh|Bouma|Bouman|Bui|Chai|Cho[ou]|Chi|\
-Desai|Dami[ae]n|Damaine|Dewan|Do|Dorent|Eak|Egiazarian|Emonet|Erat|Esen|Gat|Gia|Gianchandani|Gu|Guha|Guhan|Guedon|\
-Ha|Hakimi|Hanna|Hansen|Heidari|Himayat|Huh|Hui|Huo|Ho|Ie|Imani|Jagadeesan|Jain|Jaipuria|Jamnik|Janda|Jansen|Jayasuriya|Juge|John|Johnson|Joo|Joshi|Ju|Junge|\
+Desai|Dami[ae]n|Damak|Damaine|Dewan|Do|Dorent|Eak|Egiazarian|Emonet|Erat|Esen|Gat|Gia|Gianchandani|Gu|Guha|Guhan|Guedon|\
+Ha|Hariyono|Hakimi|Hanna|Hansen|Heidari|Himayat|Huh|Hui|Huo|Ho|Ie|Imani|Jagadeesan|Jahani|Jain|Jaipuria|Jamnik|Janda|Jansen|Jayasuriya|Juge|John|Johnson|Joo|Joshi|Ju|Junge|\
 Kahn|Kahnsari|Kate|Kazemi|Kee|Keshishian|Khurana|Ki|Kiani|Kijak|Kishore|Koren|Koo|Kunze|\
-Laina|Ma|Madan|Maiya|Maman|Mania|Mangoubi|Mannone|Manzanera|Masera|Mason|Masoomi|Mazaheri|Min|Mingyu|Miolane|Miranda|Memari|Men|Mohan|Mok|Monteiro|Moore|\
-Nabizadeh|Narayan|Narayanan|Neeman|Nayak|Nabi|Naik|Natarajan|Naowarat|Nauta|Nichani|Nizan|Neumann|Ngo|Noh|\
+Laina|Ma|Madan|Maiya|Maman|Mania|Mangoubi|Maniat|Mannone|Manzanera|Masera|Mason|Masoomi|Mazaheri|Min|Mingyu|Miolane|Miranda|Memari|Men|Mohan|Mok|Moniri|Monteiro|Moore|\
+Nabizadeh|Narayan|Narayanan|Neeman|Nayak|Nabi|Naik|Natarajan|Naowarat|Nauta|Nichani|Nizan|Neumann|Ngo|Noh|Nowara|\
 Oh|Ohana|Oza|Pai|Pajarinen|Pan|Parekh|Pateraki|Pei|Pepik|Podee|Popa|Poranne|Pore|Poria|Potapenko|Potechin|Pu|Puri|\
 Ra|Rai|Raja|Rajan|Rajawat|Rakhsha|Ramamohanarao|Ramyaa|Ran|Rana|Rane|Rau|Raket|Rakshit|Razazadeh|Razaei|Razani|Razaei|Rohani|Reinke|Ren|Riba|Ridao|Roh|Rouhani|Ruta|Ruben|Ryu|\
-Sabo|Sah|Saria|Saporito|Saenko|Saha|Sain|Saini|Samano|Samangouei|Samanta|Samara.+?|Saket|Sani|Saran|Sarawagi|Shabanian|Shah|Shayani|Shi|Shin|Shou|Shoaran|Sohn|Souza|Suh|Sundararaman|Suri|Susan|Suin|Tandon|Tonekabori|\
+Sabo|Sah|Saria|Saporito|Saenko|Saha|Sain|Saini|Samano|Samangouei|Samanta|Samara.+?|Saket|Sani|Saran|Sarawagi|Shabanian|Shah|Shakeri|Shayani|Shi|Shin|Shou|Shoaran|Sohn|Souza|Suh|Sukan|Sundararaman|Suri|Susan|Suin|Tandon|Tonekabori|\
 Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yue|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zontak|Zou)"
         self.snjpname="Jin\sJin|Ran\sTao|Ran\sBen|Yuhe\sJin|Jin\sTao|Yu\sTao|Jan\sKotera|Ken\sMai|Meina\sKan|Jinko\sKanno|Rui\sTao"
         self.snjppat="^"+self.snjpgpat+"\s|\s"+self.snjpfpat+"$|"+self.snjpname 
@@ -56,39 +56,39 @@ Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yue|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zont
 
     def isJP(self,name):
         ret = False
-        if re.search(self.sjppat,name):# jp-like name
-            if not re.search(self.snjpwpat,name):#non-jp-like
-                if not re.search(self.snjppat,name):#non-jp name
+        if re.search(self.sjppat,name,flags=re.IGNORECASE):# jp-like name
+            if not re.search(self.snjpwpat,name,flags=re.IGNORECASE):#non-jp-like
+                if not re.search(self.snjppat,name,flags=re.IGNORECASE):#non-jp name
                     ret = True
         return ret
     
     def isJPlike(self,name):
         ret = False
-        if re.search(self.sjppat,name):# jp-like name
-            if not re.search(self.snjpwpat,name):#non-jp-like
+        if re.search(self.sjppat,name,flags=re.IGNORECASE):# jp-like name
+            if not re.search(self.snjpwpat,name,flags=re.IGNORECASE):#non-jp-like
                 ret = True
 
         return ret
 
     def isJPgiven(self,name):
         ret = False
-        if re.search(self.sjppat,name):
-            if not re.search(self.snjpwpat,name):
-                if not re.search('^'+self.snjpgpat+'$',name):
+        if re.search(self.sjppat,name,flags=re.IGNORECASE):
+            if not re.search(self.snjpwpat,name,flags=re.IGNORECASE):
+                if not re.search('^'+self.snjpgpat+'$',name,flags=re.IGNORECASE):
                     ret = True
         return ret
     
     def isJPfamily(self,name):
         ret = False
-        if re.search(self.sjppat,name):
-            if not re.search(self.snjpwpat,name):
-                if not re.search('^'+self.snjpfpat+'$',name):
+        if re.search(self.sjppat,name,flags=re.IGNORECASE):
+            if not re.search(self.snjpwpat,name,flags=re.IGNORECASE):
+                if not re.search('^'+self.snjpfpat+'$',name,flags=re.IGNORECASE):
                     ret = True
         return ret
         
     def isJPname(self,name):
         ret = False
-        if not re.search('^'+self.snjpname+'$',name):
+        if not re.search('^'+self.snjpname+'$',name,flags=re.IGNORECASE):
             ret = True
         return ret
 
