@@ -5,8 +5,8 @@ import requests
 import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-#from selenium.webdriver.edge.options import Options
+#from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.by import By
 import re
 
@@ -15,22 +15,25 @@ class parseUrl:
         if len(args)==2:
             self.site = args[0]
             self.conf = args[1]
+        self.cachedir = './cache_gscholar'
+        if not os.path.isdir(self.cachedir):
+            os.mkdir(self.cachedir)
 
     def selenium(self,url,fname):
 
         try:
             #time_s = time.time()
-            #fname = re.sub("[\:\/\.]","_",url) + ".txt"
+            #fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",url) + ".txt"
             if os.path.isfile(fname):
                 with open(fname, encoding='utf-8') as f:
                     bs = BeautifulSoup(f.read(), 'html.parser')
             else:
-                chopt = Options()
-                chopt.add_argument("--headless") # headless mode
-                #egopt = Options()
-                #egopt.add_argument('headless')
-                #driver = webdriver.Edge(executable_path='./msedgedriver',options=egopt) # locate appropriate webdriver in the executable-file directory
-                driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
+                #chopt = Options()
+                #chopt.add_argument("--headless") # headless mode
+                #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
+                egopt = Options()
+                egopt.add_argument('headless')
+                driver = webdriver.Edge(executable_path='./msedgedriver',options=egopt) # locate appropriate webdriver in the executable-file directory
                 driver.get(url)
                 time.sleep(10)
                 bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
@@ -224,12 +227,9 @@ class parseUrl:
         stime = 10
         maxpage = 1500
 
-        opt = Options()
-        opt.add_argument("--headless") # headless mode
-
         bRet = False
         for ii in range(0,maxpage):
-            fname = re.sub("[\:\/\.]","_",ourl) + "_" + str(ii) + ".txt"
+            fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",ourl) + "_" + str(ii) + ".txt"
             if os.path.isfile(fname):
                 with open(fname, encoding='utf-8') as f:
                     bs = BeautifulSoup(f.read(), 'html.parser')
@@ -244,10 +244,12 @@ class parseUrl:
                 if ii == 0:
                     url = ourl 
                 if bRet or ii == 0:
-                    chopt = Options()
-                    chopt.add_argument("--headless") # headless mode
-                    driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
-                    #driver = webdriver.Edge(executable_path='./msedgedriver') # locate appropriate webdriver in the executable-file directory
+                    #chopt = Options()
+                    #chopt.add_argument("--headless") # headless mode
+                    #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
+                    egopt = Options()
+                    egopt.add_argument('headless')
+                    driver = webdriver.Edge(executable_path='./msedgedriver',options=egopt) # locate appropriate webdriver in the executable-file directory
                     driver.get(url)
                     time.sleep(stime)
                     bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
@@ -295,14 +297,14 @@ class parseUrl:
                 cname = f'{gfname[0][0]}{gfname[1][0]} {gfname[2]}'
                 url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}+{gfname[2]}&btnG='
 
-            fname = re.sub("[\:\/\.]","_",url) + ".txt"
+            fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",url) + ".txt"
             bs = self.selenium(url,fname)
 
             nmpart = bs.find('h3',{'class':'gs_ai_name'})
             linksuf = nmpart.find('a').get('href')
 
             url = f'https://scholar.google.jp{linksuf}'
-            fname = re.sub("[\:\/\.]","_",url) + ".txt"
+            fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",url) + ".txt"
             #print(f'{nm}: {url}')
             bs = self.selenium(url,fname)
 
@@ -310,7 +312,7 @@ class parseUrl:
             pubs = cpart.find_all('tr',{'class':'gsc_a_tr'})
             for pub in pubs:
                 npart = pub.find('div',{'class':'gs_gray'}).get_text().strip()
-                if re.match(cname,npart):
+                if re.match(cname,npart,flags=re.IGNORECASE):
                     tmp = pub.find('td',{'class':'gsc_a_c'}).get_text().strip()
                     try:
                         nmindcite[nm] = int(re.search('^([0-9]+)',tmp).group())
