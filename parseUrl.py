@@ -22,8 +22,6 @@ class parseUrl:
     def selenium(self,url,fname):
 
         try:
-            #time_s = time.time()
-            #fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",url) + ".txt"
             if os.path.isfile(fname):
                 with open(fname, encoding='utf-8') as f:
                     bs = BeautifulSoup(f.read(), 'html.parser')
@@ -33,16 +31,12 @@ class parseUrl:
                 #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
                 egopt = Options()
                 egopt.add_argument('headless')
-                driver = webdriver.Edge(executable_path='./msedgedriver',options=egopt) # locate appropriate webdriver in the executable-file directory
+                driver = webdriver.Edge(executable_path='./msedgedriver', options=egopt) # locate appropriate webdriver in the executable-file directory
                 driver.get(url)
                 time.sleep(10)
                 bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
-                #print(driver.page_source)
                 with open(fname, mode='w') as f:
                     f.write(str(bs.prettify()))
-                #time_e = time.time()
-                #etime = time_e - time_s
-                #print("elapsed time: {0:.2f}".format(etime))
         except driver.exceptions.RequestException as e:
             print("Error: ",e)
         finally:
@@ -218,14 +212,14 @@ class parseUrl:
 
         return normal, title, author
  
-    def Gscholar(self):
+    def Gscholar(self,maxpage):
         normal = False
         name = []
         aff = []
         citation = []
         ourl = self.site
         stime = 10
-        maxpage = 1500
+        #maxpage = 900
 
         bRet = False
         for ii in range(0,maxpage):
@@ -249,7 +243,7 @@ class parseUrl:
                     #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
                     egopt = Options()
                     egopt.add_argument('headless')
-                    driver = webdriver.Edge(executable_path='./msedgedriver',options=egopt) # locate appropriate webdriver in the executable-file directory
+                    driver = webdriver.Edge(executable_path='./msedgedriver', options=egopt) # locate appropriate webdriver in the executable-file directory
                     driver.get(url)
                     time.sleep(stime)
                     bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
