@@ -30,7 +30,7 @@ class parseUrl:
                 #chopt.add_argument("--headless") # headless mode
                 #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
                 egopt = Options()
-                egopt.add_argument('headless')
+                egopt.add_argument("headless")
                 driver = webdriver.Edge(executable_path='./msedgedriver', options=egopt) # locate appropriate webdriver in the executable-file directory
                 driver.get(url)
                 time.sleep(10)
@@ -242,7 +242,7 @@ class parseUrl:
                     #chopt.add_argument("--headless") # headless mode
                     #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
                     egopt = Options()
-                    egopt.add_argument('headless')
+                    egopt.add_argument("headless")
                     driver = webdriver.Edge(executable_path='./msedgedriver', options=egopt) # locate appropriate webdriver in the executable-file directory
                     driver.get(url)
                     time.sleep(stime)
@@ -285,10 +285,10 @@ class parseUrl:
 
             gfname = re.split('\s',nm)
             if len(gfname)==2:
-                cname = f'{gfname[0][0]} {gfname[1]}'
+                cname = f'{gfname[0]} {gfname[1]}'
                 url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}&btnG='
             elif len(gfname)==3:
-                cname = f'{gfname[0][0]}{gfname[1][0]} {gfname[2]}'
+                cname = f'{gfname[0]}{gfname[1]} {gfname[2]}'
                 url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}+{gfname[2]}&btnG='
 
             fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",url) + ".txt"
