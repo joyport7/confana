@@ -218,8 +218,7 @@ class parseUrl:
         aff = []
         citation = []
         ourl = self.site
-        stime = 10
-        #maxpage = 900
+        stime = 10 # anti-ratelimit
 
         bRet = False
         for ii in range(0,maxpage):
@@ -282,13 +281,15 @@ class parseUrl:
 
         for nm in nmlist:
             nmindcite[nm] = 0
-
             gfname = re.split('\s',nm)
             if len(gfname)==2:
-                cname = f'{gfname[0]} {gfname[1]}'
+                cname = f'{gfname[0][0]} {gfname[1]}'
                 url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}&btnG='
             elif len(gfname)==3:
-                cname = f'{gfname[0]}{gfname[1]} {gfname[2]}'
+                try:
+                    cname = f'{gfname[0][0]}{gfname[1][0]} {gfname[2]}'
+                except:
+                    print(gfname)
                 url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}+{gfname[2]}&btnG='
 
             fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",url) + ".txt"
@@ -306,6 +307,7 @@ class parseUrl:
             pubs = cpart.find_all('tr',{'class':'gsc_a_tr'})
             for pub in pubs:
                 npart = pub.find('div',{'class':'gs_gray'}).get_text().strip()
+                print(npart)
                 if re.match(cname,npart,flags=re.IGNORECASE):
                     tmp = pub.find('td',{'class':'gsc_a_c'}).get_text().strip()
                     try:

@@ -12,6 +12,8 @@ class parseNAClist:
             self.aff_list = args[1]
             self.cite_list = args[2]
         else:
+            #ADEKANMI ADEYINKA ADEGUN
+            #Rohan Doshi
             print('too many inputs for initialization')
         self.sjppat="^([AIUEO]|[BGKMNPR][aiueoAIUEO]|[BGKMNPR][yY][auoAUO]|D[aeoAEO]|S[aueoAUEO]|S[hH][aiouAIOU]|T[aeoAEO]|T[sS][uU]|Z[aueoAUEO]|Y[auoAUO]|\
 H[aieoAIEO]|HY[auoAUO]|J[aiuoAIUO]|J[y][auoAUO]|C[hH][aiuoAIUO]|D[aeoAEO]|W[aA]|F[uU])\
@@ -20,7 +22,8 @@ H[aieoAIEO]|HY[auoAUO]|J[aiuoAIUO]|J[y][auoAUO]|C[hH][aiuoAIUO]|D[aeoAEO]|W[aA]|
 |([tT]|[tT][tT])[aeoAEO]|([tT]|[tT][tT])[sS][uU]|[zZ][aueoAUEO]|[yY][auoAUO]|[hH][aieoAIEO]|[hH][yY][auoAUO]|[jJ][aiuoAIUO]|[jJ][y][auoAUO]|([cC]|[cC][cC])[hH][aiuoAIUO]|[dD][aeoAEO]|[wW][aA]|[fF][uU]|[AIUEOKSTNHMYRW]\.)*?$"
         self.snjpwpat="[^n]'|-|[qxv]|[áčçøåÅÇØ]|[^aiueontkh\.][\s$]|nn[\s$]|\
 aer|ahn|[bjr]iao|riao|bodo|(ch|[bdj])ae|choe|eu[in]|eau|f[ieo]|hao|[bh]ee|hoai|oao|[jmys]oon|papi|pine|shore|dani|doo|guru|suchi|doan|saima|aitao|banjan|aharo|oee|chink|joan|deon|\
-[hkg]yu[nk]|youn|guk|jia|hua|jie[^in]|nea|ksha|anton|bao|boja|debo|narayana|sundara|ram|rosen|baum|hasson|parat|moetes|poo|rissa\
+janna|ce|el|zaa|che|yau|rohan|adeka|adegu|yi|\
+[hkg]yu[nk]|youn|guk|jia|hua|jie[^in]|nea|ksha|anton|bao|boja|debo|narayana|sundara|ram|rosen|baum|hasson|parat|moetes|poo|rissa|redd|opuri|pere|asank|zahid|june|aisha|teoh|iang|\
 jas|jaso|jau|joko|john|jose|juho|jung|joua|shu[ioa]|rian|[sg]uo|seo[nk]|shan|eun[gk]|shai|shaha|naseri|njiza|tteo|zeika|gaga|charya|gaja|mohan|raja|mohana|domi|pou|baie|gudo|zere|tonya|akya|engyu|hyoji|nisha|mora|zade|ryan|pita|tanyu|nyuk|dorai|habi|biba|bukh|\
 [bdfghjklmpqrvwxyz][bcdfgjklmpqrtvwxz]|c[^h]|t[^taeos]|s[^saueoh]|ss*h[^aiuo]|tt*s[^u]|m[^bdpaiueo]|[tk]h$|[in]h$|[rsyn][ai]ni$|haran$|dat$|bot$|[ds]ah$|neh|[ds]eem$|r*[jy]an$|rek$|to[rs]o$|daan$|ksha$|rak[\s$]|sen$|nen$|sek[\s$]|[fy]uan$|uri[\s$]"
         self.snjpgpat="\
@@ -34,19 +37,19 @@ Kaan|Kannan|Kanika|K[ai]ran|Kate|Kenan|Kenneth|Kiana|Ki[ae]n|Kochise|Koushik|Led
 Maatei|Matteo|Madonna|Mainak|Man|Manikanta|Marek|Marion|Masha|Matan|Mateja|Matt|Mayank|Mazen|Masoumeh|Meena|Meike|Mengu|Menoua|Miao|Mihai|Min|Minho*|Minji|Min[jJ]oon|Min[jJ]un*|Minsu|Minkyo|Mubarak|Moein|Mohi|Mohsen|Moin|Monika|Moon|Moonsoo|Moran|Mouna|Musa|\
 Nageen|Namo|Nariman|Neha|Nikita|Nima|Nirat|Nona|Nooshin|Nuno|\
 Okan|Oren|Ori|Oladayo|Osama|Oya|Pere|Pouya|Pu|Ramana|Rami|Ranjan|Renshuai|Reuben|Reza|Rishi|Ruben|Rohit|Roi|Ruwan|Ruhi|Ryan|\
-Sachin|Sage|Sagie|Sanchari|Saikat|Sandaru|Saman|Sami|Samitha|Samira|Sarah|Sayan|Sean|Seba|Sek|Sen|Shagan|Shaurya|Shasha|Shayak|Shayan|Shai|Shichao|Shishira|Shujon|Soomin|Sun|Suman|Suranjana|Suren|Sunita|Taha|Taman|Tanaya|Tapani|Teresa|Tarasha|\
-Udana|Wah|Yan|Yani|Yanrui|Yangyu|Yaochu|Yasaman|Yohan|Yuanbiao|Yue|Yun|Yunmo|Yuru|Yunhao|Zarena|Zarana|Zerui|Zeyu)"
+Sachin|Sage|Sagie|Sanchari|Saikat|Sandaru|Saman|Sami|Samitha|Samira|Sarah|Sayan|Sean|Seba|Sek|Sen|Shagan|Shaurya|Shasha|Shayak|Shayan|Shai|Shichao|Shirine|Shishira|Shujon|Soomin|Sun|Suman|Suranjana|Suren|Sunita|Taha|Taman|Tanaya|Tapani|Teresa|Tarasha|\
+Udana|Wa[hi]|Yan|Yani|Yanrui|Yangyu|Yaochu|Yasaman|Yohan|Yuanbiao|Yue|Yun|Yunmo|Yuru|Yunhao|Zarena|Zarana|Zerui|Zeyu)"
         self.snjpfpat="\
 ((Ch|N)a|(Ch|Sh|[YSHFOLGMB])[uo]|[YSHFOLGMKZ]e|[EH]o|An|([TYHGW]|[BDL]|Shu)ai|[BGHYMR]ao|([YRG]u|Ch|[LYHTWGNM])an|[BNJ]i|Jia|[JM]iao|[GS]ui|[YS]un|[KGZ]uo|[LM]ei|Heo|[YH]ou|Choi|Yoo|Yoon|\
 Aakanksha|Achan|Acharya|Arora|Ahuja|Aksak|Akshara|Amani|Amini|Aminzadeh|Amit|Amin|Aneke|Antebi|Aran|Ariyanto|Aryan|\
 Ba|Badea|Basu|Bilen|Bahadori|Bandara|Bauza|Ben|Bennett|Benton|Benjamin|Benson|Bera|Bian|Bianchi|Bin|Bok|Boneh|Bouma|Bouman|Bui|Chai|Cho[ou]|Chi|\
-Dagan|Desai|Dami[ae]n|Damak|Damaine|Dewan|Do|Dorent|Eak|Egiazarian|Emonet|Erat|Esen|Gat|Gia|Gini|Gianchandani|Gu|Guha|Guhan|Guedon|\
+Dagan|Desai|Dami[ae]n|Damak|Damaine|Dewan|Do|Dorent|Doshi|Eak|Egiazarian|Emonet|Erat|Esen|Gat|Gia|Gini|Gianchandani|Gu|Guha|Guhan|Guedon|\
 Ha|Hanan|Hariyono|Hakimi|Hanna|Hansen|Heidari|Himayat|Huh|Hui|Huo|Ho|Ie|Imani|\
 Jagadeesan|Jahani|Jain|Jaipuria|Jamnik|Janda|Jansen|Jayasuriya|Juge|John|Johnson|Joo|Joshi|Ju|Junge|\
 Kao|Kahn|Kahnsari|Kate|Kazemi|Kee|Keshishian|Khurana|Ki|Kiani|Kijak|Kim|Kishore|Koren|Koo|Kunze|\
 Laina|Ma|Madan|Maiya|Maman|Mania|Mangoubi|Maniat|Mannone|Manzanera|Masera|Mason|Masoomi|Mazaheri|Menna|Mi|Min|Minu|Mingyu|Miolane|Miranda|Memari|Men|Mohan|Mok|Moniri|Monteiro|Moore|Mozeika|Munaro|Munjiza|\
 Nabizadeh|Narayan|Narayanan|Neeman|Nayak|Nabi|Naik|Natarajan|Naowarat|Nauta|Nichani|Nizan|Neumann|Ngo|Noh|Nona|Nowara|\
-Oh|Ohana|Oza|Pai|Pajarinen|Pan|Parekh|Pateraki|Pei|Pepik|Podee|Popa|Poranne|Pore|Poria|Potapenko|Potechin|Pu|Puri|\
+Oh|Ohana|Omena|Oza|Pai|Pajarinen|Pan|Parekh|Pateraki|Pei|Pepik|Podee|Popa|Poranne|Pore|Poria|Potapenko|Potechin|Pu|Puri|\
 Ra|Rai|Raja|Rajan|Rajawat|Rakhsha|Ramamohanarao|Ramyaa|Ran|Rana|Rane|Rau|Raket|Rakshit|Razazadeh|Razaei|Razani|Razaei|Rohani|Reinke|Ren|Riba|Ridao|Roh|Rouhani|Ruta|Ruben|Ryu|\
 Sabo|Sah|Saria|Saporito|Saenko|Saha|Sain|Saini|Saman[oi]|Samangouei|Samanta|Samara.+?|Saket|Sani|Saran|Sarawagi|Shabanian|Shah|Shakeri|Shayani|Shi|Shin|Shou|Shoaran|Sohn|Souza|Suh|Sukan|Sundararaman|Suri|Susan|Suin|Tandon|Tonekabori|\
 Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yu[eh]|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zontak|Zou)"
@@ -101,6 +104,7 @@ Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yu[eh]|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Z
         for ii in range(0,len(self.name_list)):
             jpp = False
             name = self.name_list[ii]
+            name = re.sub("  "," ",name)
             tmp = re.search('[^/]+(?= /)',name)
             if tmp:
                 name = tmp.group()
