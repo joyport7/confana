@@ -6,29 +6,17 @@ import re
 class parseNAClist:
     def __init__(self, *args):
         if len(args) <= 2:
-            print('parseATlist should be initialized with at least two parameters')
-        elif len(args) == 3:
+            print('parseATlist should be initialized with at least 4 parameters')
+        elif len(args) == 4:
             self.name_list = args[0]
-            self.aff_list = args[1]
-            self.cite_list = args[2]
+            self.nm_link = args[1]
+            self.aff_list = args[2]
+            self.cite_list = args[3]
+            self.name_list = self.convertname(self.name_list)
         else:
-            #Rabin Banjade
-            #Ananya B. Sai
-            #Sainik Kumar Mahata
-            #Ashok Kumar Pant
-            #Yunita Sari
-            #Inigo Jauregi Unanue
-            #Kaushik Ram Sadagopan
-            #Irina Pak
-            #Deepak Sahoo
-            #Hamada M. Zahera
-            #Rina Kumari
-            #Anshuman Pattanaik
-            #Mahsa Teimourikia
-            #Pikakshi Manchanda
-            #Anshu Chittora
-            #Shihan Dou
             print('too many inputs for initialization')
+        
+        #Rina Kumari
         self.sjppat="^([AIUEO]|[BGKMNPR][aiueoAIUEO]|[BGKMNPR][yY][auoAUO]|D[aeoAEO]|S[aueoAUEO]|S[hH][aiouAIOU]|T[aeoAEO]|T[sS][uU]|Z[aueoAUEO]|Y[auoAUO]|\
 H[aieoAIEO]|HY[auoAUO]|J[aiuoAIUO]|J[y][auoAUO]|C[hH][aiuoAIUO]|D[aeoAEO]|W[aA]|F[uU])\
 ([\s'nmhtkNMHTK]|[aiueoAIUEO]|([bgkmnprBGKMNPR]|[kK][kK]|[mM][mM]|[nN][nN]|[pP][pP])[aiueoAIUEO]|([bgkmnprBGKMNPR]|[kK][kK]|[mM][mM]|[nN][nN]|\
@@ -111,38 +99,81 @@ Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yu[eh]|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Z
 
     def selectJP(self):
         jpname = []
+        jplink = []
         jpaff = []
         jpcite = []
         numjp = 0
         
         for ii in range(0,len(self.name_list)):
-            jpp = False
             name = self.name_list[ii]
             name = re.sub("  "," ",name)
-            tmp = re.search('[^/]+(?= /)',name)
-            if tmp:
-                name = tmp.group()
-            names = re.split('\s',name)
-            if len(names) == 2:
-                if self.isJPlike(names[0]+" "+names[1]):
-                    if self.isJPgiven(names[0]):
-                        if self.isJPfamily(names[1]):
+            #tmp = re.search('[^/]+(?= /)',name)
+            #if tmp:
+            #    name = tmp.group()
+
+            gfname = re.split('\s',name)
+            if len(gfname) == 2:
+                if self.isJPlike(gfname[0]+" "+gfname[1]):
+                    if self.isJPgiven(gfname[0]):
+                        if self.isJPfamily(gfname[1]):
                             if self.isJPname(name):
                                 numjp += 1
                                 jpname.append(name)
+                                jplink.append(self.nm_link[ii])
                                 jpaff.append(self.aff_list[ii])
                                 jpcite.append(self.cite_list[ii])
-                                jpp = True
-            elif len(names) == 3:
-                if self.isJPlike(names[0]+" "+names[2]):
-                    if self.isJPgiven(names[0]):
-                        if self.isJPfamily(names[2]):
+            elif len(gfname) == 3:
+                if self.isJPlike(gfname[0]+" "+gfname[2]):
+                    if self.isJPgiven(gfname[0]):
+                        if self.isJPfamily(gfname[2]):
                             if self.isJPname(name):
                                 numjp += 1
                                 jpname.append(name)
+                                jplink.append(self.nm_link[ii])
                                 jpaff.append(self.aff_list[ii])
                                 jpcite.append(self.cite_list[ii])
-                                jpp = True
 
-        return jpname, jpaff, jpcite, numjp
+        return jpname, jplink, jpaff, jpcite, numjp
 
+    def convertname(self,jpname):
+        for ii in range(0,len(jpname)):
+            nm = jpname[ii]
+            if nm == 'Sato Imari':
+                nm = 'Imari Sato'
+            elif nm == 'Okatani Takayuki':
+                nm = 'Takayuki Okatani'
+            elif nm == 'Shouno Hayaru':
+                nm = 'Hayaru Shouno'
+            elif nm == 'Shuuji Shuuji':
+                nm = 'Shuuji Shuuji'
+            elif nm == 'Okada Hiroyuki':
+                nm = 'Hiroyuki Okada'
+            elif nm == 'Endo Gen':
+                nm = 'Gen Endo'
+            elif nm == 'YAMADA Tomohiro':
+                nm = 'Tomohiro YAMADA'
+            elif nm == 'Obinata Goro':
+                nm = 'Goro Obinata'
+            elif nm == 'Ohya Akihisa':
+                nm = 'Akihisa Ohya'
+            elif nm == 'Nagata Fusaomi':
+                nm = 'Fusaomi Nagata'
+            elif nm == 'Miyoshi Tasuku':
+                nm = 'Tasuku Miyoshi'
+            elif nm == 'Fukui Rui':
+                nm = 'Rui Fukui'
+            elif nm == 'Sugaya Midori':
+                nm = 'Midori Sugaya'
+            elif nm == 'Sugaya Midori':
+                nm = 'Midori Sugaya'
+            elif nm == 'Sugaya Midori':
+                nm = 'Midori Sugaya'
+            elif nm == 'Sugaya Midori':
+                nm = 'Midori Sugaya'
+            elif nm == 'Sugaya Midori':
+                nm = 'Midori Sugaya'
+            elif nm == 'Sugaya Midori':
+                nm = 'Midori Sugaya'
+            jpname[ii] = nm
+
+        return jpname

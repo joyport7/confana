@@ -11,13 +11,10 @@ from selenium.webdriver.common.by import By
 import re
 
 class parseUrl:
-    def __init__(self, *args):
-        if len(args)==2:
-            self.site = args[0]
-            self.conf = args[1]
-        self.cachedir = './cache_gscholar'
-        if not os.path.isdir(self.cachedir):
-            os.mkdir(self.cachedir)
+    def __init__(self, params):
+        self.site = params.site
+        self.conf = params.conf_prefix
+        self.cachedir = params.cachedir
 
     def selenium(self,url,fname):
 
@@ -215,6 +212,7 @@ class parseUrl:
     def Gscholar(self,maxpage):
         normal = False
         name = []
+        link = []
         aff = []
         citation = []
         ourl = self.site
@@ -266,42 +264,33 @@ class parseUrl:
             affs = bs.find_all('div',{'class':'gs_ai_aff'})
             cits = bs.find_all('div',{'class':'gs_ai_cby'})
             for jj in range(0,len(names)):
-                name.append(re.sub('\n|\s\(.+?\)|\(.+?\)|\s\(.+?）|\s（.+?）|（.+?）$','',names[jj].get_text().strip()))
+                name.append(re.sub('\n|\s\(.+?\)|\(.+?\)|\s\(.+?）|\s（.+?）|（.+?）$|\s\/.+','',names[jj].get_text().strip()))
+                link.append(names[jj].find('a').get('href'))
                 af = affs[jj].get_text().strip()
                 af = re.sub('.*Professor.*, |.*Professor.* of .+?, |.*Professor.* of |, .*Professor|\s*\(.+?\)\s*|.+? at |.*Scientist, |.*Researcher, |.*Engineering, |.*Science, |Group, |.*Robotics, |.*Vision, |, CEO|, Founder','',af).strip()
                 aff.append(af)
                 citation.append(int(re.sub('被引用数: ','',cits[jj].get_text())))
         
         normal = True
-        return normal, name, aff, citation
+        return normal, name, link, aff, citation
 
-    def GscholarInd(self, nmlist):
+    def GscholarInd(self, names, nmlinks):
         normal = False
         nmindcite = {}
 
-        for nm in nmlist:
+        for ii in range(0,len(names)):
+            nm = names[ii]
+            linksuf = nmlinks[ii]
             nmindcite[nm] = 0
+            url = f'https://scholar.google.jp{linksuf}'
+            fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",url) + ".txt"
+            bs = self.selenium(url,fname)
+
             gfname = re.split('\s',nm)
             if len(gfname)==2:
                 cname = f'{gfname[0][0]} {gfname[1]}'
-                url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}&btnG='
             elif len(gfname)==3:
-                try:
-                    cname = f'{gfname[0][0]}{gfname[1][0]} {gfname[2]}'
-                except:
-                    print(gfname)
-                url = f'https://scholar.google.jp/citations?hl=ja&view_op=search_authors&mauthors={gfname[0]}+{gfname[1]}+{gfname[2]}&btnG='
-
-            fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",url) + ".txt"
-            bs = self.selenium(url,fname)
-
-            nmpart = bs.find('h3',{'class':'gs_ai_name'})
-            linksuf = nmpart.find('a').get('href')
-
-            url = f'https://scholar.google.jp{linksuf}'
-            fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",url) + ".txt"
-            #print(f'{nm}: {url}')
-            bs = self.selenium(url,fname)
+                cname = f'{gfname[0][0]}{gfname[1][0]} {gfname[2]}'
 
             cpart = bs.find('div',{'class':'gsc_lcl gsc_prf_pnl'})
             pubs = cpart.find_all('tr',{'class':'gsc_a_tr'})
@@ -317,3 +306,10 @@ class parseUrl:
 
         normal = True
         return normal, nmindcite
+
+    def csvwrite(self,fname, *lists):
+        with open(fname, 'w', encoding = "utf_8") as file:
+            for items in zip(*lists):
+                line = ','.join(str(item) for item in items) + '\n'
+                file.write(line)
+                
