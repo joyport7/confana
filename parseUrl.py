@@ -307,7 +307,6 @@ class parseUrl:
             pubs = cpart.find_all('tr',{'class':'gsc_a_tr'})
             for pub in pubs:
                 npart = pub.find('div',{'class':'gs_gray'}).get_text().strip()
-                print(npart)
                 if re.match(cname,npart,flags=re.IGNORECASE):
                     tmp = pub.find('td',{'class':'gsc_a_c'}).get_text().strip()
                     try:
