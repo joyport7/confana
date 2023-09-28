@@ -10,3 +10,4 @@ from .parseTitle import parseTitle
 from .parseUrl import parseUrl
 from .parseHist import parseHist
 from .parseNAC import parseNAClist
+from .jpnm import jpnm

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 import re
-
+from .jpnm import jpnm
 
 class parseATlist:
     def __init__(self, *args):
@@ -17,13 +17,14 @@ class parseATlist:
 H[aieoAIEO]|HY[auoAUO]|J[aiuoAIUO]|J[y][auoAUO]|C[hH][aiuoAIUO]|D[aeoAEO]|W[aA]|F[uU])\
 ([\s'nmhtkNMHTK]|[aiueoAIUEO]|([bgkmnprBGKMNPR]|[kK][kK]|[mM][mM]|[nN][nN]|[pP][pP])[aiueoAIUEO]|([bgkmnprBGKMNPR]|[kK][kK]|[mM][mM]|[nN][nN]|\
 [pP][pP])[yY][auoAUO]|[dD][aeoAEO]|([sS]|[sS][sS])[aueoAUEO]|([sS]|[sS][sS])[hH][aiouAIOU]\
-|([tT]|[tT][tT])[aeoAEO]|([tT]|[tT][tT])[sS][uU]|[zZ][aueoAUEO]|[yY][auoAUO]|[hH][aieoAIEO]|[hH][yY][auoAUO]|[jJ][aiuoAIUO]|[jJ][y][auoAUO]|([cC]|[cC][cC])[hH][aiuoAIUO]|[dD][aeoAEO]|[wW][aA]|[fF][uU]|[AIUEOKSTNHMYRW]\.)*?$"
+|([tT]|[tT][tT])[aeoAEO]|([tT]|[tT][tT])[sS][uU]|[zZ][aueoAUEO]|[yY][auoAUO]|[hH][aieoAIEO]|[hH][yY][auoAUO]|[jJ][aiuoAIUO]|\[jJ][y][auoAUO]|([cC]|[cC][cC])[hH][aiuoAIUO]|[dD][aeoAEO]|[wW][aA]|[fF][uU]|[AIUEOKSTNHMYRW]\.)*?$"
         self.snjpwpat="[^n]'|-|[QXVqxv]|[áčçøåÅÇØ]|[^aiueontkh\.]\s|[^aiueontkh]$|nn\s|nn$|\
-[aA]er|ahn|[bBjJ]iao|[bB]odo|([cC]h|[bdjBDJ])ae|[cC]hoe|[eE]ui|[eE]un|eau|[fF][ieo]|[hH]ao|Hee|[hH]oai|[hH]yun|[hH]yuk|Joon|[yY]oun|guk|[jJ]ia|[hH]ua|Niu|[jJ]ie[^in]|[hkgHKG]yun|nea|\
-[sS]hui|rian|[sSgG]uo|[sS]eo[nk]|[sS]han|[sS]eung|[sS]huai|uan|\
-([fF][yY]u)an$|\
-[rsy]ani|rini|[rR]oha|gudo|[zZ]ere|[kK]ede|[aA]hn|\
-[bdfghjklmpqrvwxyzBCDFGHJKLMPQRTVWXYZ][bcdfgjklmpqrtvwxz]|c[^h]|[tT][^aeos]|s[^aueoh]|[sS]h[^aiuo]|[tT]s[^u]|[in]h$|[jJ]as"
+[aA]er|ahn|[bBjJ]iao|[bB]odo|([cC]h|[bdjBDJ])ae|[cC]hoe|[eE]ui|[eE]un|eau|[fF][ieo]|[hH]ao|Hee|[hH]oai|[hH]yun|[hH]yuk|Joon|[yY]oun|\
+#guk|[jJ]ia|[hH]ua|Niu|[jJ]ie[^in]|[hkgHKG]yun|nea|\
+#[sS]hui|rian|[sSgG]uo|[sS]eo[nk]|[sS]han|[sS]eung|[sS]huai|uan|\
+#([fF][yY]u)an$|\
+#[rsy]ani|rini|[rR]oha|gudo|[zZ]ere|[kK]ede|[aA]hn|\
+#[bdfghjklmpqrvwxyzBCDFGHJKLMPQRTVWXYZ][bcdfgjklmpqrtvwxz]|c[^h]|s[^aueoh]|[sS]h[^aiuo]|[tT]s[^u]|[in]h$|[jJ]as"
         self.snjpgpat="\
 (([JN]|Sh|Ch)i|Bin|[GKd]e|Bo|Hai|[TH]ao|Bei|Ku[in]|\
 Aakanksha|Aa*ron|Akanksha|Amanda|Ameya|Ami[tn]|Anita|Anki|Ankita|Annika|Anton|Antoin|Antonio|Anuja|Aran|Arya|Arun|Aida|Aren|Arezou|Aria|Aryan|Ata|\
@@ -53,46 +54,6 @@ Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yue|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zou)
         self.snjppat="^"+self.snjpgpat+"\s|\s"+self.snjpfpat+"$|"+self.snjpname 
         self.dlm=",\s"
 
-    def isJP(self,name):
-        ret = False
-        if re.search(self.sjppat,name):# jp-like name
-            if not re.search(self.snjpwpat,name):#non-jp-like
-                if not re.search(self.snjppat,name):#non-jp name
-                    ret = True
-                #else:
-                #    print(f'non jp name: {name}')
-        return ret
-    
-    def isJPlike(self,name):
-        ret = False
-        if re.search(self.sjppat,name):# jp-like name
-            if not re.search(self.snjpwpat,name):#non-jp-like
-                ret = True
-
-        return ret
-
-    def isJPgiven(self,name):
-        ret = False
-        if re.search(self.sjppat,name):
-            if not re.search(self.snjpwpat,name):
-                if not re.search('^'+self.snjpgpat+'$',name):
-                    ret = True
-        return ret
-    
-    def isJPfamily(self,name):
-        ret = False
-        if re.search(self.sjppat,name):
-            if not re.search(self.snjpwpat,name):
-                if not re.search('^'+self.snjpfpat+'$',name):
-                    ret = True
-        return ret
-        
-    def isJPname(self,name):
-        ret = False
-        if not re.search('^'+self.snjpname+'$',name):
-            ret = True
-        return ret
-
     def selectJP(self):
         jpauthor = []
         jptitle = []
@@ -100,30 +61,20 @@ Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yue|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zou)
         numallauthors = 0
         numjpauthors = 0
         numallpapers = len(self.title_list)
+        verbose = False
+
+        jn = jpnm()
         
         for ii in range(0,self.num_papers):
             ttl = self.title_list[ii]
             jpp = False
             for au in self.author_list[ii]:
                 numallauthors += 1
-                if self.isJPlike(au):
-                    aus = re.split('\s',au)
-                    if len(aus) == 2:
-                        if self.isJPgiven(aus[0]):
-                            if self.isJPfamily(aus[1]):
-                                if self.isJPname(au):
-                                    numjpauthors += 1
-                                    jpauthor.append(au)
-                                    jptitle.append(ttl)
-                                    jpp = True
-                    elif len(aus) == 3:
-                        if self.isJPgiven(aus[0]):
-                            if self.isJPfamily(aus[2]):
-                                if self.isJPname(au):
-                                    numjpauthors += 1
-                                    jpauthor.append(au)
-                                    jptitle.append(ttl)
-                                    jpp = True
+                if jn.check(au,verbose):
+                    numjpauthors += 1
+                    jpauthor.append(au)
+                    jptitle.append(ttl)
+                    jpp = True
 
             if jpp:
                 numjppaper += 1

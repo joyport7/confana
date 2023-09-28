@@ -14,6 +14,8 @@ class set_param:
         self.yearTo = yearTo+1
         self.toShow = toShow
         self.interval = interval
-        self.cachedir = './cache_gscholar' + '/' + conf_prefix
+        self.cachedirpar = './cache'
+        self.cachedir = self.cachedirpar + '/' + conf_prefix
         if not os.path.isdir(self.cachedir):
+            os.mkdir(self.cachedirpar)
             os.mkdir(self.cachedir)

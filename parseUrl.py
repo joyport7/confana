@@ -11,10 +11,16 @@ from selenium.webdriver.common.by import By
 import re
 
 class parseUrl:
-    def __init__(self, params):
-        self.site = params.site
-        self.conf = params.conf_prefix
-        self.cachedir = params.cachedir
+    def __init__(self, *args):
+        if len(args) == 1:
+            self.site = args[0].site
+            self.conf = args[0].conf_prefix
+            self.cachedir = args[0].cachedir
+        elif len(args) == 2:
+            yr = args[1]
+            self.site = args[0].site
+            self.conf = args[0].conf_prefix + yr
+            self.cachedir = args[0].cachedir
 
     def selenium(self,url,fname):
 
@@ -310,6 +316,6 @@ class parseUrl:
     def csvwrite(self,fname, *lists):
         with open(fname, 'w', encoding = "utf_8") as file:
             for items in zip(*lists):
-                line = ','.join(str(item) for item in items) + '\n'
+                line = '\t'.join(str(item) for item in items) + '\n'
                 file.write(line)
                 
