@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 import re
+from .jpnm import jpnm
 
 
 class parseNAClist:
@@ -108,9 +109,13 @@ Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yu[eh]|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Z
         jpaff = []
         jpcite = []
         numjp = 0
-        
+        verbose = False
+
+        jn = jpnm()
+
         for ii in range(0,len(self.name_list)):
             name = self.name_list[ii]
+            """
             name = re.sub("  "," ",name)
             #tmp = re.search('[^/]+(?= /)',name)
             #if tmp:
@@ -137,6 +142,13 @@ Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yu[eh]|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Z
                                 jplink.append(self.nm_link[ii])
                                 jpaff.append(self.aff_list[ii])
                                 jpcite.append(self.cite_list[ii])
+            """
+            if jn.check(name,verbose):
+                numjp += 1
+                jpname.append(name)
+                jplink.append(self.nm_link[ii])
+                jpaff.append(self.aff_list[ii])
+                jpcite.append(self.cite_list[ii])
 
         return jpname, jplink, jpaff, jpcite, numjp
 
