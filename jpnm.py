@@ -2,22 +2,15 @@
 # coding: utf-8
 import re
 
-#Rina Kumari
-#Chooi Ling GOH
-#Mario Ezra Aragon
-#Mai Hoang Dao
-#Chia Yew Ken
-#Rina Kumari
-
 class jpnm:
     def __init__(self):
         self.sjppat="^(([aiueo]h*|[kgnhbmr][aiueo]h*|s[aueo]h*|j[aiuo]h*|t[aeo]|[kmgr]*y[auo]h*|[cs]h[auio]h*|shi|tsu|wa|fu|d[aeo]|z[aueo]h*)n*t*[' \.]*)+$"
         self.snjpwpat="[^n]'|-|[qxv]|[áčçøåÅÇØ]|[^aiueontkh\.][\s$]|nn[\s$]|\
-aer|ahn|ajaka|[bjr]iao|riao|bodo|(ch|[bdj])ae|choe|eu[in]|eau|f[ieo]|hao|[bh]ee|hoai|oao|[jmys]oon|papi|pine|shore|dani|doo|guru|suchi|doan|saima|aitao|banjan|aharo|oee|chink|joan|deon|menon|goo|choon|\
+aer|ahn|ajaka|[bjr]iao|riao|bodo|(ch|[bdj])ae|choe|eu[in]|eau|f[ieo]|hao|[bh]ee|hoai|oao|[jmys]oon|papi|pine|shore|dani|doo|guru|suchi|doan|saima|aitao|banjan|aharo|oee|chink|joan|deon|menon|goo|choo[ni]|\
 janna|ce|el|zaa|che|yau|rohan|adeka|adegu|yi|rabi|jade|nanya|pant|jau|inigo|nue|aushik|gopan|pak|z[ea]he|ahoo|shuman|patt|naik|teimo|kia|pika|ksh|chitt|shiha|yuni|saini|yunbo|azuri|tton|muyao|derya|hui[\s$]|\
 [hkg]yu[nk]|youn|guk|jia|hua|jie[^in]|nea|ksha|anton|bao|boja|debo|narayana|sundara|ram|rosen|baum|hasson|parat|moetes|poo|rissa|redd|opuri|pere|asank|zahid|june|aisha|teoh|iang|roman|shoo|shibo|biran|\
 jas|jaso|jau|joko|john|jose|juho|jung|joua|shu[ioa]|rian|[sg]uo|seo[nk]|shan|eun[gk]|shai|shaha|naseri|njiza|tteo|zeika|gaga|charya|gaja|mohan|raja|mohana|domi|pou|baie|gudo|zere|tonya|akya|engyu|hyoji|\
-nisha|mora|zade|ryan|pita|tanyu|nyuk|dorai|habi|biba|bukh|sundan|zeit|ragan|regin|giot|yuho|nachike|\
+nisha|mora|zade|ryan|pita|tanyu|nyuk|dorai|habi|biba|bukh|sundan|zeit|ragan|regin|giot|yuho|nachike|ling|ezra|aragon|hoang|\
 [bdfghjklmpqrvwxyz][bcdfgjklmpqrtvwxz]|c[^h]|t[^taeos\s]|s[^saueoh]|ss*h[^aiuo]|tt*s[^u]|m[^bdpaiueo]|[tk]h$|[in]h$|[rsyn][ai]ni$|haran$|dat$|bot$|[ds]ah$|neh|[ds]eem$|r*[jy]an$|rek$|to[rs]o$|daan$|ksha$|rak[\s$]|sen$|nen$|sek[\s$]|[fy]uan$|uri[\s$]"
         self.snjpgpat="\
 (([JN]|Sh|Ch)i|Bin|[GKd]e|Bo|Hai|[TH]ao|Bei|Ku[in]|\
@@ -46,7 +39,7 @@ Oh|Ohana|Omena|Oza|Pai|Pajarinen|Pan|Parekh|Pateraki|Pei|Pepik|Podee|Popa|Porann
 Ra|Rai|Raja|Rajan|Rajawat|Rakhsha|Ramamohanarao|Ramyaa|Ran|Rana|Rane|Rau|Raket|Rakshit|Razazadeh|Razaei|Razani|Razaei|Rohani|Reinke|Ren|Riba|Ridao|Roh|Rouhani|Ruta|Ruben|Ryu|\
 Sabo|Sah|Saria|Sai|Saikin|Saporito|Saenko|Saha|Sain|Saini|Saman[oi]|Samangouei|Samanta|Samara.+?|Saket|Sani|Saran|Sarawagi|Shabanian|Shah|Shakeri|Shayani|Shi|Shin|Shou|Shoaran|Sohn|Souza|Suh|Sukan|Sundararaman|Suri|Susan|Suin|Tandon|Tasan|Tonekabori|\
 Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yu[eh]|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zontak|Zou)"
-        self.snjpname="Jin Jin|Ran Tao|Ran Ben|Yuhe Jin|Jin Tao|Yu Tao|Jan Kotera|Ken Mai|Meina Kan|Jinko Kanno|Rui Tao|Ao Jin|Jun Dan|\
+        self.snjpname="Jin Jin|Ran Tao|Ran Ben|Yuhe Jin|Jin Tao|Yu Tao|Jan Kotera|Ken Mai|Meina Kan|Jinko Kanno|Rui Tao|Ao Jin|Jun Dan|Rina Kumari|\
 Ana Maria Tome|Shu Tao"
         self.snjppat="^"+self.snjpgpat+"\s|\s"+self.snjpfpat+"$|"+self.snjpname 
         self.dlm=",\s"
