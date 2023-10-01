@@ -7,8 +7,8 @@ from .jpnm import jpnm
 class parseNAClist:
     def __init__(self, *args):
         self.tcvlst = 'Sato Imari|Okatani Takayuki|Shouno Hayaru|Shuuji Shuuji|Okada Hiroyuki|Endo Gen|YAMADA Tomohiro|\
-Obinata Goro|Ohya Akihisa|Nagata Fusaomi|Miyoshi Tasuku|Fukui Rui|Sugaya Midori|Takeuchi Ichiro|Suzuki Joe|SHIMIZU Shohei|\
-Kawakami Kazuya|Akiyama Yutaka|Nagao Tomoharu'
+Obinata Goro|Ohya Akihisa|Nagata Fusaomi|Miyoshi Tasuku|Fukui Rui|Sugaya Midori|Takeuchi Ichiro|SHIMIZU Shohei|Suzuki Joe|\
+Kawakami Kazuya|Akiyama Yutaka|Nagao Tomoharu|Kobayashi Hirofumi'
 
         if len(args) <= 2:
             print('parseATlist should be initialized with at least 4 parameters')
@@ -45,7 +45,7 @@ Kawakami Kazuya|Akiyama Yutaka|Nagao Tomoharu'
     
     def convertgf(self,name):
         nms = re.split('\s',name)
-        return nms[1] + '\s' + nms[0]
+        return nms[1] + ' ' + nms[0]
 
     def convertname(self,nms):
         for ii in range(0,len(nms)):
