@@ -16,6 +16,7 @@ class set_param:
         self.interval = interval
         self.cachedirpar = './cache'
         self.cachedir = self.cachedirpar + '/' + conf_prefix
-        if not os.path.isdir(self.cachedir):
+        if not os.path.isdir(self.cachedirpar):
             os.mkdir(self.cachedirpar)
+        if not os.path.isdir(self.cachedir):
             os.mkdir(self.cachedir)
