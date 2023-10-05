@@ -8,7 +8,7 @@ class jpnm:
         self.snjpwpat="[^n]'|-|[qxv]|[áčçøåÅÇØ]|[^aiueontkh\.][\s$]|nn[\s$]|\
 aer|ahn|ajaka|[bjr]iao|riao|bodo|(ch|[bdj])ae|choe|eu[in]|eau|f[ieo]|hao|[bh]ee|hoai|oao|[jmys]oon|papi|pine|shore|dani|doo|guru|suchi|doan|saima|aitao|banjan|aharo|oee|chink|joan|deon|menon|goo|choo[ni]|\
 janna|ce|el|zaa|che|yau|rohan|adeka|adegu|yi|rabi|jade|nanya|pant|jau|inigo|nue|aushik|gopan|pak|z[ea]he|ahoo|shuman|patt|naik|teimo|kia|pika|ksh|chitt|shiha|yuni|saini|yunbo|azuri|tton|muyao|derya|hui[\s$]|\
-[hkg]yu[nk]|youn|guk|jia|hua|jie[^in]|nea|ksha|anton|bao|boja|debo|narayana|sundara|ram|rosen|baum|hasson|parat|moetes|poo|rissa|redd|opuri|pere|asank|zahid|june|aisha|teoh|iang|roman|shoo|shibo|biran|\
+[hkg]yu[nk]|youn|guk|jia|hua|jie[^in]|nea|ksha|anton|bao|boja|debo|narayana|sundara|ram|rosen|baum|hasson|parat|moetes|poo|rissa|redd|opuri|pere|asank|zahid|june|aisha|teoh|iang|roman|shoo|shibo|biran|abayo|\
 jas|jaso|jau|joko|john|jose|juho|jung|joua|shu[ioa]|rian|[sg]uo|seo[nk]|shan|eun[gk]|shai|shaha|naseri|njiza|tteo|zeika|gaga|charya|gaja|mohan|raja|mohana|domi|pou|baie|gudo|zere|tonya|akya|engyu|hyoji|\
 nisha|mora|zade|ryan|pita|tanyu|nyuk|dorai|habi|biba|bukh|sundan|zeit|ragan|regin|giot|yuho|nachike|ling|ezra|aragon|hoang|chana|warit[\s$]|noit[\s$]|aison|zamani|matei|bean|moari|osonde|haata|irene|maa[\s$]|\
 [bdfghjklmpqrvwxyz][bcdfgjklmpqrtvwxz]|c[^h]|t[^taeos\s]|s[^saueoh]|ss*h[^aiuo]|tt*s[^u]|m[^bdpaiueo]|[tk]h$|[in]h$|[rsyn][ai]ni$|haran$|dat$|bot$|[ds]ah$|neh|[ds]eem$|r*[jy]an$|rek$|to[rs]o$|daan$|ksha$|rak[\s$]|sen$|nen$|sek[\s$]|[fy]uan$|uri[\s$]"

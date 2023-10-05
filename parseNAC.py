@@ -8,7 +8,7 @@ class parseNAClist:
     def __init__(self, *args):
         self.tcvlst = 'Sato Imari|Okatani Takayuki|Shouno Hayaru|Shuuji Shuuji|Okada Hiroyuki|Endo Gen|YAMADA Tomohiro|\
 Obinata Goro|Ohya Akihisa|Nagata Fusaomi|Miyoshi Tasuku|Fukui Rui|Sugaya Midori|Takeuchi Ichiro|SHIMIZU Shohei|Suzuki Joe|\
-Kawakami Kazuya|Akiyama Yutaka|Nagao Tomoharu|Kobayashi Hirofumi|Sakumura Yuichi'
+Kawakami Kazuya|Akiyama Yutaka|Nagao Tomoharu|Kobayashi Hirofumi|Sakumura Yuichi|Kajita Shuuji|Hashimoto Kazumune'
 
         if len(args) <= 2:
             print('parseATlist should be initialized with at least 4 parameters')
