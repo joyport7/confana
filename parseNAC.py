@@ -23,7 +23,6 @@ Kawakami Kazuya|Akiyama Yutaka|Nagao Tomoharu|Kobayashi Hirofumi|Sakumura Yuichi
         
 
     def selectJP(self, *args):
-        print(len(args))
         if len(args) == 0:
             verbose = False
         elif len(args) == 1:

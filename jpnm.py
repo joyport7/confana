@@ -4,8 +4,8 @@ import re
 
 class jpnm:
     def __init__(self):
-        self.sjppat="^(([aiueo]h*|[kgnhbmr][aiueo]h*|s[aueo]h*|j[aiuo]h*|t[aeo]|[kmgr]*y[auo]h*|[cs]h[auio]h*|shi|tsu|wa|fu|d[aeo]|z[aueo]h*)n*t*[' \.]*)+$"
-        self.snjpwpat="[^n]'|-|[qxv]|[áčçøåÅÇØ]|[^aiueontkh\.][\s$]|nn[\s$]|\
+        self.sjppat="^(([aiueo]h*|[kgnhbmr][aiueo]h*|s[aueo]h*|j[aiuo]h*|t[aeo]|[kmgr]*y[auo]h*|[cs]h[auio]h*|shi|tsu|wa|fu|d[aeo]|z[aueo]h*)n*t*[-' \.]*)+$"
+        self.snjpwpat="[^n]['-]|[qxv]|[áčçøåÅÇØ]|[^aiueontkh\.][\s$]|nn[\s$]|\
 aer|ahn|ajaka|[bjr]iao|riao|bodo|(ch|[bdj])ae|choe|eu[in]|eau|f[ieo]|hao|[bh]ee|hoai|oao|[jmys]oon|papi|pine|shore|dani|doo|guru|doan|saima|aitao|banjan|aharo|oee|chink|joan|deon|menon|goo|choo[ni]|yunke|mason|\
 janna|ce|el|zaa|che|yau|rohan|adeka|adegu|yi|rabi|jade|nanya|pant|jau|inigo|nue|aushik|gopan|pak|z[ea]he|ahoo|shuman|patt|naik|teimo|kia|pika|ksh|chitt|shiha|yuni|saini|yunbo|azuri|tton|muyao|derya|hui[\s$]|rouse|\
 [hkg]yu[nk]|youn|guk|jia|hua|jie[^in]|nea|ksha|anton|bao|boja|debo|narayana|sundara|ram|rosen|baum|hasson|parat|moetes|poo|rissa|redd|opuri|pere|asank|zahid|june|aisha|teoh|iang|roman|shoo|shibo|biran|abayo|sacha|chaita|tanya|erank|natasha|\
