@@ -22,13 +22,21 @@ Kawakami Kazuya|Akiyama Yutaka|Nagao Tomoharu|Kobayashi Hirofumi|Sakumura Yuichi
             print('too many inputs for initialization')
         
 
-    def selectJP(self):
+    def selectJP(self, *args):
+        print(len(args))
+        if len(args) == 0:
+            verbose = False
+        elif len(args) == 1:
+            verbose = args[0]
+        elif len(args) >= 2:
+            print('too many inputs for initialization')
+
         jpname = []
         jplink = []
         jpaff = []
         jpcite = []
         numjp = 0
-        verbose = False
+        #verbose = False
 
         jn = jpnm()
 

@@ -145,6 +145,8 @@ class parseUrl:
                 continue
             elif re.search("(TuPS)|(WePS)",session):
                 continue
+            elif re.search("(MoAIP)|(MoBIP)|(TuAIP)|(TuBIP)|(WeAIP)|(WeBIP)|(MoSP)|(MoPL)|(TuSP)|(TuPL)|(WeSP)|(WePL)",session):
+                continue
             sect = sect.next_sibling
             sect = sect.next_sibling
             sp = sect.find('span',{'class':'pTtl'})
@@ -181,8 +183,7 @@ class parseUrl:
             author.append(authors) 
         
         normal = True
-
-        return normal, title, author
+        return normal, author, title
     
     def IEEERAS(self,url):
         normal = False
