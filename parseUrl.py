@@ -5,8 +5,8 @@ import requests
 import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
-#from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.edge.options import Options
+from selenium.webdriver.chrome.options import Options
+#from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.by import By
 import re
 
@@ -21,31 +21,173 @@ class parseUrl:
             self.site = args[0].site
             self.conf = args[0].conf_prefix + yr
             self.cachedir = args[0].cachedir
+        
+        if re.search('ICLR',self.conf):
+            self.setICLRop()
+        elif re.search('CoRL',self.conf):
+            self.setCoRLop()
+        
+        self.sltime = 15
 
-    def selenium(self,url,fname):
+    def setICLRop(self):
+        yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
+        print(yr[0])
+        if yr[0] == '2018':
+            self.oralheld = True
+            self.slheld = False
+            self.posterheld = True
+            self.oralpt = 'accepted-oral-papers'
+            self.posterpt = 'accepted-poster-papers'
+            self.slpt = ''
+        elif yr[0] == '2019':
+            self.oralheld = True
+            self.slheld = False
+            self.posterheld = True
+            self.oralpt = 'oral-presentations'
+            self.posterpt = 'poster-presentations'
+            self.slpt = ''
+        elif yr[0] == '2020':
+            self.oralheld = True
+            self.slheld = True
+            self.posterheld = True
+            self.oralpt = 'oral-presentations'
+            self.posterpt = 'poster-presentations'
+            self.slpt = 'spotlight-presentations'
+        elif yr[0] == '2021':
+            self.oralheld = True
+            self.slheld = True
+            self.posterheld = True
+            self.oralpt = 'oral-presentations'
+            self.posterpt = 'poster-presentations'
+            self.slpt = 'spotlight-presentations'
+        elif yr[0] == '2022':
+            self.oralheld = True
+            self.slheld = True
+            self.posterheld = True
+            self.oralpt = 'oral-submissions'
+            self.posterpt = 'poster-submissions'
+            self.slpt = 'spotlight-submissions'
 
+    def setCoRLop(self):
+        yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
+        if yr[0] == '2021':
+            self.oralheld = True
+            self.slheld = False
+            self.posterheld = True
+            self.oralpt = 'accept--oral-'
+            self.posterpt = 'accept--poster-'
+            self.slpt = '-'
+        elif yr[0] == '2022':
+            self.oralheld = True
+            self.slheld = False
+            self.posterheld = True
+            self.oralpt = 'accept--oral-'
+            self.posterpt = 'accept--poster-'
+            self.slpt = '-'
+        elif yr[0] == '2023':
+            self.oralheld = True
+            self.slheld = False
+            self.posterheld = True
+            self.oralpt = 'accept--oral-'
+            self.posterpt = 'accept--poster-'
+            self.slpt = '-'
+
+    def selenium_sub(self,url,pt):
+        
+        print(url,pt)
         try:
-            if os.path.isfile(fname):
-                with open(fname, encoding='utf-8') as f:
-                    bs = BeautifulSoup(f.read(), 'html.parser')
-            else:
-                #chopt = Options()
-                #chopt.add_argument("--headless") # headless mode
-                #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
-                egopt = Options()
-                egopt.add_argument("headless")
-                driver = webdriver.Edge(executable_path='./msedgedriver', options=egopt) # locate appropriate webdriver in the executable-file directory
-                driver.get(url)
-                time.sleep(10)
-                bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
-                with open(fname, mode='w') as f:
-                    f.write(str(bs.prettify()))
+            bs = []
+            chopt = Options()
+            #chopt.add_argument("--headless") # headless mode
+            driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
+            driver.get(url)
+            time.sleep(self.sltime)
+            
+            bs.append(BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser'))
+            a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
+            elems = a_item.find_elements(By.TAG_NAME, ("nav"))
+
+            if len(elems) != 0:
+                a_items = elems[0]
+                a_items = a_item.find_elements(By.CLASS_NAME, ("right-arrow"))
+                max_page = int(a_items[1].get_attribute("data-page-number"))
+                print(max_page,' pages')
+                print(end='#')
+
+                for ii in range(1,max_page):
+                    print(end='#')
+                    a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
+                    a_item = a_item.find_element(By.TAG_NAME, ("nav"))
+                    a_item = a_item.find_element(By.LINK_TEXT, str(ii+1))
+                    a_item.click()
+                    time.sleep(self.sltime)
+                    bs.append(BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser'))
+                
+                print('\n')
+
         except driver.exceptions.RequestException as e:
             print("Error: ",e)
+
         finally:
-            #driver.quit()
-            pass
+            driver.quit()
+        
         return bs
+
+    def selenium(self):
+        sltime = self.sltime
+
+        bs = None
+        bs_oral = None
+        bs_sl = None
+        bs_poster = None
+
+        oralheld = self.oralheld
+        slheld = self.slheld
+        posterheld = self.posterheld
+        oralpt = self.oralpt
+        slpt = self.slpt
+        posterpt = self.posterpt
+
+        url_oral = self.url + '#' + oralpt
+        url_sl = self.url + '#' + slpt
+        url_poster = self.url + '#' + posterpt
+
+        chopt = Options()
+        chopt.add_argument("--headless") # headless mode
+        driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
+        #egopt = Options()
+        #egopt.add_argument("headless")
+        #driver = webdriver.Edge(executable_path='./msedgedriver', options=egopt) # locate appropriate webdriver in the executable-file directory
+
+        if re.search('(ICLR|CoRL)',self.conf):
+            if oralheld:
+                print('oral')
+                bs_oral = self.selenium_sub(url_oral,oralpt)
+            if slheld:
+                print('spotlight')
+                bs_sl = self.selenium_sub(url_sl,slpt)
+            if posterheld:
+                print('poster')
+                bs_poster = self.selenium_sub(url_poster,posterpt)
+        else:
+            try:
+                if os.path.isfile(fname):
+                    with open(fname, encoding='utf-8') as f:
+                        bs = BeautifulSoup(f.read(), 'html.parser')
+                else:
+                    driver.get(self.url)
+                    time.sleep(sltime)
+                    bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
+                    fname = re.sub('[\:\/\?]','-',self.url) + '.txt'
+                    with open(fname, mode='w') as f:
+                        f.write(str(bs.prettify()))
+            except driver.exceptions.RequestException as e:
+                print("Error: ",e)
+            finally:
+                #driver.quit()
+                pass
+
+        return bs, bs_oral, bs_poster, bs_sl
             
     def beautifulsoup(self,url):
         try:
@@ -57,7 +199,7 @@ class parseUrl:
         return bs
     
     def parseCVFsite(self,url):
-        normal = -1
+        normal = False
         author, title = [], []
         
         print(url)
@@ -83,11 +225,11 @@ class parseUrl:
                 except:
                     print(f'failed:{line}')
                     print(titles[ii-1].get_text())
-        normal = 1
+        normal = True
         return normal, author, title
 
     def parseCVF(self): 
-        normal = -1 
+        normal = False
         author, title = [], [] 
         
         rootsite = self.site + self.conf
@@ -216,6 +358,59 @@ class parseUrl:
 
         return normal, title, author
  
+    def parseOpenReview(self,url):
+        normal = False
+        self.url = url
+        bs, bs_orals, bs_posters, bs_sls = self.selenium()
+        
+        title_list = []
+        author_list = []
+
+        #-----------
+        numoral = 0
+        if self.oralheld:
+            for ii in range(0,len(bs_orals)):
+                oralblock = bs_orals[ii].find("div",{"id":self.oralpt})
+                tts = oralblock.find_all("h4")
+                aus = oralblock.find_all("div",{"class":"note-authors"})
+
+                numoral += len(tts)
+                for jj in range(0,len(tts)):
+                    title_list.append(tts[jj].get_text().strip())
+                    author_list.append(aus[jj].get_text().strip().split(', '))
+            print(numoral)
+                
+        #-----------
+        numsl = 0
+        if self.slheld:
+            for ii in range(0,len(bs_sls)):
+                slblock = bs_sls[ii].find("div",{"id":self.slpt})
+                tts = slblock.find_all("h4")
+                aus = slblock.find_all("div",{"class":"note-authors"})
+
+                numsl += len(tts)
+                for jj in range(0,len(tts)):
+                    title_list.append(tts[jj].get_text().strip())
+                    author_list.append(aus[jj].get_text().strip().split(', '))
+            print(numsl)
+        
+        #-----------
+        numposter = 0
+        if self.posterheld:
+            for ii in range(0,len(bs_posters)):
+                posterblock = bs_posters[ii].find("div",{"id":self.posterpt})
+                tts = posterblock.find_all("h4")
+                aus = posterblock.find_all("div",{"class":"note-authors"})
+
+                numposter += len(tts)
+                for jj in range(0,len(tts)):
+                    title_list.append(tts[jj].get_text().strip())
+                    author_list.append(aus[jj].get_text().strip().split(', '))
+            print(numposter)
+        
+        normal = True
+        return normal, author_list, title_list
+    
     def Gscholar(self,maxpage):
         normal = False
         name = []
