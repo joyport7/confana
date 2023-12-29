@@ -94,7 +94,7 @@ class parseUrl:
 
     def selenium_sub(self,url,pt):
         
-        print(url,pt)
+        print(url)
         try:
             bs = []
             chopt = Options()
@@ -161,13 +161,10 @@ class parseUrl:
 
         if re.search('(ICLR|CoRL)',self.conf):
             if oralheld:
-                print('oral')
                 bs_oral = self.selenium_sub(url_oral,oralpt)
             if slheld:
-                print('spotlight')
                 bs_sl = self.selenium_sub(url_sl,slpt)
             if posterheld:
-                print('poster')
                 bs_poster = self.selenium_sub(url_poster,posterpt)
         else:
             try:
@@ -378,7 +375,6 @@ class parseUrl:
                 for jj in range(0,len(tts)):
                     title_list.append(tts[jj].get_text().strip())
                     author_list.append(aus[jj].get_text().strip().split(', '))
-            print(numoral)
                 
         #-----------
         numsl = 0
@@ -392,7 +388,6 @@ class parseUrl:
                 for jj in range(0,len(tts)):
                     title_list.append(tts[jj].get_text().strip())
                     author_list.append(aus[jj].get_text().strip().split(', '))
-            print(numsl)
         
         #-----------
         numposter = 0
@@ -406,10 +401,10 @@ class parseUrl:
                 for jj in range(0,len(tts)):
                     title_list.append(tts[jj].get_text().strip())
                     author_list.append(aus[jj].get_text().strip().split(', '))
-            print(numposter)
+
         
         normal = True
-        return normal, author_list, title_list
+        return normal, author_list, title_list, numoral, numsl, numposter
     
     def Gscholar(self,maxpage):
         normal = False
