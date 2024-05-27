@@ -145,9 +145,9 @@ class parseUrl:
             time.sleep(self.sltime)
             
             soup = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
-            fname = re.sub('[\:\/\?]','-',url) + '.txt'
-            with open(fname, mode='w') as f:
-                f.write(str(soup.prettify()))
+            #fname = re.sub('[\:\/\?]','-',url) + '.txt'
+            #with open(fname, mode='w') as f:
+            #    f.write(str(soup.prettify()))
 
             bs.append(soup)
             a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
