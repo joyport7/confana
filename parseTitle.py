@@ -9,24 +9,26 @@ class parseTitle:
         self.replist = re.compile("^\s|^(?:a|an|the|in)\s|\s(?:a|an|the|in)\s|[^si](s)$|^\s$|^in$",re.IGNORECASE)
         self.pulist = re.compile("(3d reconstruction|object detection|object recognition|object categorization|6d pose|face recognition|face detection|face verification|face identification|\
 pedestrian detection|open dataset|knowledge distillation|style transfer|character recognition|character region detection|text spot|\
-semantic segmentation|instance segmentation|image segmenation|object tracking|image retrieval|metric learning|pre training|fine tuning|fully convolutional network|Neural Radience Field|Light field|\
-action recognition|re identification|image classification|deformable matching|deformable object|non　rigid|weak supervision|transformer|autoencoder|decoder|\
+semantic segmentation|instance segmentation|image segmenation|object tracking|metric learning|pre training|fine tuning|fully convolutional network|Neural Radience Field|Light field|\
+action recognition|re identification|image classification|deformable matching|deformable object|non rigid|weak supervision|transformer|auto encoder|decoder|\
 knowledge transfer|domain adapation|domain adaptation|reinforcement learning|transfer learning|active learning|multi modal|cross modal|\
-simultaneous localization and mapping|federated learning|point cloud|Siamese|wild|disentangl|E2E|end to end|sparse|adversarial|weakly supervised|\
-weak supervision|self supervis|one shot|few shot|zero shot|image generation|video generation|question answer|captioning|\
-diffusion|human computer interaction|attention|representation learning|contrastive learning|continual learning|incremental learning|\
-unsupervised|semi supervised|noisy label|soft label|deep neural network|boosting|boost|expert|spatio temporal|\
-multi task learning|multiple instance learning|multi instance learning|Kullback Leibler)s*",re.IGNORECASE)
+simultaneous localization and mapping|federated learning|point cloud|Siamese|wild|disentangl|E2E|end to end|spars|adversarial|weakly supervised|\
+weak supervision|self supervis|one shot|few shot|zero shot|image generation|video generation|question answer|captioning|Differential privacy|\
+diffusion|human computer interaction|attention|representation learning|contrastive learning|continual learning|incremental learning|meta learning|\
+unsupervised|semi supervised|noisy label|soft label|deep neural network|boosting|boost|expert|spatio temporal|Bayesian|Bandit|Combinatorial|\
+multi task learning|multiple instance learning|multi instance learning|Kullback Leibler|generative|LLM|Language Model|tuning|embedding|\
+Curriculum|certification|equivariant|normalizing flow|world model|flow network|multi agent|long context|feature selection|model selection|data selection|subset selection|\
+latent|quantum|low rank|instruction|label|submodular|Lipschitz)s*",re.IGNORECASE)
         self.malist = re.compile("[^\s-](SLAM|CNN|R CNN|RCNN|RNN|LSTM|CTC|SOM|GAN|ICA|PCA|U NET|UNET|Nerf|SVM|Bagging|MOE|\
-Random forest|RF|KL divergence|DNN|GBM)s*[-\s$]")
+Random forest|RF|KL divergence|DNN|GBM|VAE|ODE|PDE|CLIP)s*[-\s$]")
         self.plist = re.compile(".+?\s(?:interaction|estimation|prediction|alignment|detection|recognition|classification|segmentation|\
 identification|retrieval|generation|prediction|inpainting|labeling|distillation|visualizaton|reconstruction|enhancement|\
 editing|idenfication|verification|authentication|restoration|tracking|matching|categorization|denoising|navigation|Attack|Grounding|amplification|Captioning|\
 answering|answer|Recovery|Parsing|localization|retargeting|relocalization|Synthesis|Correction|Searching|search|compression|Rendering|DeepFake|Reading|\
-benchmark|benchmarking|animation|Translation)s*",re.IGNORECASE)
+benchmark|benchmarking|animation|Translation|music|fairness|responsible|trustworthy|pruning)s*",re.IGNORECASE)
         self.mlist = re.compile("\w+[-\s]*(?:clustering|graph|training|transfer|Defocus|Regression|supression|synthetic|resolution|adaptation|network|\
-fusion|reasoning|topology|space|modeling|model|learning|Feature|Generalization|Detector|\
-classifier|recognizer|minimization|maxmization|Expression|label|Descriptor|extractor|sparcification|regularization|quantization|coarse to fine)s*|\
+fusion|reasoning|topology|space|modeling|model|learning|Feature|Generalization|Detector|variation|representation|\
+classifier|recognizer|minimization|maxmization|Expression|label|Descriptor|extractor|regularization|quantization|coarse to fine|contrastive)s*|\
 Independent Component",re.IGNORECASE)
         #llist = re.compile("",re.IGNORECASE)
         self.tlist = re.compile(".*(?:3D|rgbd|video|frame|dataset|camera|infrared|depth|lider|3D|Text to Image|imagenet|wordnet)[-s]*",re.IGNORECASE)
@@ -35,12 +37,12 @@ Independent Component",re.IGNORECASE)
 
     def wordfreq(self):
         for title in self.titles:
-            #print(title)
             sepwords = self.seplist.split(title)
-            bMatch = 0
             for item in sepwords:
                 item = self.replist.sub("", item)
                 item = re.sub( r'-' , " ", item )
+                item = re.sub( r'sation' , "zation", item )
+                item = re.sub( r'ising' , "izing", item )
                 #####
                 words = self.pulist.findall(item)
                 if words:

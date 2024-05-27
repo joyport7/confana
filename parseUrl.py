@@ -6,8 +6,8 @@ import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-#from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import WebDriverException
 import re
 
 class parseUrl:
@@ -26,8 +26,35 @@ class parseUrl:
             self.setICLRop()
         elif re.search('CoRL',self.conf):
             self.setCoRLop()
+        elif re.search('NeurIPS',self.conf):
+            self.setNeurIPSop()
         
         self.sltime = 15
+
+    def setNeurIPSop(self):
+        yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
+        print(yr[0])
+        if yr[0] == '2023':
+            self.oralheld = True
+            self.slheld = True
+            self.posterheld = True
+            self.oralpt = 'accept-oral'
+            self.posterpt = 'accept-poster'
+            self.slpt = 'accept-spotlight'
+        elif yr[0] == '2022':
+            self.oralheld = True
+            self.slheld = False
+            self.posterheld = False
+            self.oralpt = 'accepted-papers'
+            self.posterpt = ''
+            self.slpt = ''
+        elif yr[0] == '2021':
+            self.oralheld = True
+            self.slheld = True
+            self.posterheld = True
+            self.oralpt = 'oral-presentations'
+            self.posterpt = 'poster-presentations'
+            self.slpt = 'spotlight-presentations'
 
     def setICLRop(self):
         yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
@@ -67,6 +94,20 @@ class parseUrl:
             self.oralpt = 'oral-submissions'
             self.posterpt = 'poster-submissions'
             self.slpt = 'spotlight-submissions'
+        elif yr[0] == '2023':
+            self.oralheld = True
+            self.slheld = True
+            self.posterheld = True
+            self.oralpt = 'notable-top-5-'
+            self.posterpt = 'poster'
+            self.slpt = 'notable-top-25-'
+        elif yr[0] == '2024':
+            self.oralheld = True
+            self.slheld = True
+            self.posterheld = True
+            self.oralpt = 'accept-oral'
+            self.posterpt = 'accept-poster'
+            self.slpt = 'accept-spotlight'
 
     def setCoRLop(self):
         yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
@@ -103,29 +144,79 @@ class parseUrl:
             driver.get(url)
             time.sleep(self.sltime)
             
-            bs.append(BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser'))
+            soup = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
+            fname = re.sub('[\:\/\?]','-',url) + '.txt'
+            with open(fname, mode='w') as f:
+                f.write(str(soup.prettify()))
+
+            bs.append(soup)
             a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
             elems = a_item.find_elements(By.TAG_NAME, ("nav"))
 
-            if len(elems) != 0:
-                a_items = elems[0]
-                a_items = a_item.find_elements(By.CLASS_NAME, ("right-arrow"))
-                max_page = int(a_items[1].get_attribute("data-page-number"))
-                print(max_page,' pages')
-                print(end='#')
 
-                for ii in range(1,max_page):
-                    print(end='#')
-                    a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
-                    a_item = a_item.find_element(By.TAG_NAME, ("nav"))
-                    a_item = a_item.find_element(By.LINK_TEXT, str(ii+1))
-                    a_item.click()
-                    time.sleep(self.sltime)
-                    bs.append(BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser'))
+            #if len(elems) != 0:
+            #    a_items = elems[0]
+            #    a_items = a_item.find_elements(By.CLASS_NAME, ("right-arrow"))
+            #    max_page = int(a_items[1].get_attribute("data-page-number"))
+            #    print(max_page,' pages')
+            #    print(end='#')
+
+            #    for ii in range(1,max_page):
+            #        print(end='#')
+            #        a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
+            #        a_item = a_item.find_element(By.TAG_NAME, ("nav"))
+            #        a_item = a_item.find_element(By.LINK_TEXT, str(ii+1))
+            #        a_item.click()
+            #        time.sleep(self.sltime)
+            #        bs.append(BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser'))
                 
-                print('\n')
+            #    print('\n')
+            if len(elems) != 0:
+                a_item = elems[0]
+                try:
+                    a_items = a_item.find_elements(By.CLASS_NAME, ("right-arrow"))
+                    max_page = int(a_items[1].get_attribute("data-page-number"))
+                    print(max_page,' pages')
+                    print(end='#')
+                    for ii in range(1,max_page):
+                        print(end='#')
+                        a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
+                        a_item = a_item.find_element(By.TAG_NAME, ("nav"))
+                        a_item = a_item.find_element(By.LINK_TEXT, str(ii+1))
+                        a_item.click()
+                        time.sleep(self.sltime)
+                        bs.append(BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser'))
+                    print('\n')
+                except:
+                    a_items = a_item.find_elements(By.TAG_NAME, ("a"))
+                    ii = 1
+                    max_page = 1
+                    while 1:
+                        for it in a_items:
+                            try:
+                                pn = int(it.text)
+                                if pn > max_page:
+                                    max_page = pn
+                            except:
+                                pass
+                        #print(end='#')
+                        print(r'{0}/{1}'.format(ii,max_page))
+                        if ii == max_page:
+                            break
+                        a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
+                        a_item = a_item.find_element(By.TAG_NAME, ("nav"))
+                        a_item = a_item.find_element(By.LINK_TEXT, str(ii+1))
+                        a_item.click()
+                        time.sleep(self.sltime)
+                        bs.append(BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser'))
+                        a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
+                        elems = a_item.find_elements(By.TAG_NAME, ("nav"))
+                        a_item = elems[0]
+                        a_items = a_item.find_elements(By.TAG_NAME, ("a"))
+                        ii += 1
 
-        except driver.exceptions.RequestException as e:
+        #except driver.exceptions.RequestException as e:
+        except WebDriverException as e:
             print("Error: ",e)
 
         finally:
@@ -148,9 +239,18 @@ class parseUrl:
         slpt = self.slpt
         posterpt = self.posterpt
 
-        url_oral = self.url + '#' + oralpt
-        url_sl = self.url + '#' + slpt
-        url_poster = self.url + '#' + posterpt
+        #url_oral = self.url + '#' + oralpt
+        #url_sl = self.url + '#' + slpt
+        #url_poster = self.url + '#' + posterpt
+        yr = re.search('[0-9][0-9][0-9][0-9]',self.url)
+        if yr[0] == '2024':
+            url_oral = self.url + '#tab-' + oralpt
+            url_sl = self.url + '#tab-' + slpt
+            url_poster = self.url + '#tab-' + posterpt
+        else:
+            url_oral = self.url + '#' + oralpt
+            url_sl = self.url + '#' + slpt
+            url_poster = self.url + '#' + posterpt
 
         chopt = Options()
         chopt.add_argument("--headless") # headless mode
@@ -159,7 +259,7 @@ class parseUrl:
         #egopt.add_argument("headless")
         #driver = webdriver.Edge(executable_path='./msedgedriver', options=egopt) # locate appropriate webdriver in the executable-file directory
 
-        if re.search('(ICLR|CoRL)',self.conf):
+        if re.search('(ICLR|CoRL|NeurIPS)',self.conf):
             if oralheld:
                 bs_oral = self.selenium_sub(url_oral,oralpt)
             if slheld:
@@ -178,7 +278,7 @@ class parseUrl:
                     fname = re.sub('[\:\/\?]','-',self.url) + '.txt'
                     with open(fname, mode='w') as f:
                         f.write(str(bs.prettify()))
-            except driver.exceptions.RequestException as e:
+            except WebDriverException as e:
                 print("Error: ",e)
             finally:
                 #driver.quit()
