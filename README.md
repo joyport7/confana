@@ -4,6 +4,7 @@ Scraping and analysis module for scientific conferences
 # support
 - CVPR, ICCV (CVF website)
 - ICRA (odd number year), IROS (papercept website)
+- Open review (ICRA/NeurIPS/...)
 - Google scholar
 
 # requisite
@@ -14,14 +15,14 @@ Scraping and analysis module for scientific conferences
 - to be described
 - parseUrl
   - scraping
-- parseAT
-  - author-title list in conference proceedings
+- parse
+  - to make an author-title list in conference proceedings
 - parseNAC
-  - name-affiliation-citation list in the google scholar
+  - to make name-affiliation-citation list in the google scholar
 - parseHist
-  - make author-title list histgram by year and merge it over years
+  - to make an author-title histgram by year and merge it over years
 - parseTitle
-  - make a keyword histogram
+  - to make a keyword histogram
 - jpnm
-  - judge Japanese names
+  - to judge Japanese names
 
