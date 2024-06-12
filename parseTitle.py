@@ -10,8 +10,8 @@ class parseTitle:
         
         self.plist = "interaction|estimation|prediction|alignment|detection|recognition|classification|segmentation|\
 identification|retrieval|generation|prediction|inpainting|labeling|distillation|visualizaton|reconstruction|enhancement|\
-editing|idenfication|verification|authentication|restoration|tracking|matching|categorization|denoising|navigation|Attack|Grounding|amplification|Captioning|\
-answering|answer|Recovery|Parsing|localization|retargeting|relocalization|Synthesis|Correction|Searching|search|compression|Rendering|DeepFake|Reading|\
+editing|idenfication|verification|authentication|restoration|tracking|matching|categorization|denoising|navigation|attack|grounding|amplification|Captioning|\
+answering|answer|recovery|parsing|localization|retargeting|facial expression|relocalization|Synthesis|Correction|Searching|search|compression|Rendering|DeepFake|Reading|\
 benchmark|benchmarking|animation|Translation|music|fairness|responsible|trustworthy|pruning|question answer"
         self.pulist = "3d reconstruction|object detection|object recognition|object categorization|6d pose|face recognition|face detection|face verification|face identification|\
 pedestrian detection|open dataset|knowledge distillation|style transfer|character recognition|character region detection|text spot|\
@@ -25,11 +25,11 @@ unsupervised|semi supervised|noisy label|soft label|deep neural network|boosting
 multi task learning|multiple instance learning|multi instance learning|Kullback Leibler|generative|LLM|Language Model|tuning|embedding|\
 Curriculum|certification|equivariant|normalizing flow|world model|flow network|multi agent|long context|feature selection|model selection|data selection|subset selection|\
 latent|quantum|low rank|instruction|label|submodular|Lipschitz|vision and language|visual language"
-        self.mlist = "learning|clustering|graph|training|transfer|Defocus|Regression|supression|synthetic|resolution|adaptation|network|\
-fusion|reasoning|topology|space|modeling|Feature|Generalization|Detector|variation|representation|\
-classifier|recognizer|minimization|maxmization|Expression|label|Descriptor|extractor|regularization|quantization|coarse to fine|contrastive\
+        self.mlist = "learning|clustering|graph|training|transfer|defocus|regression|supression|synthetic|resolution|adaptation|\
+fusion|reasoning|topology|space|modeling|feature|generalization|detector|variation|representation|\
+classifier|recognizer|minimization|maxmization|label|descriptor|extractor|regularization|quantization|coarse to fine|contrastive\
 Independent Component"
-        self.tlist = "3D|rgbd|video|frame|dataset|camera|infrared|depth|lider|3D|Text to Image|imagenet|wordnet"
+        self.tlist = "3D|rgbd|video|dataset|camera|infrared|depth|lider|Text to Image|imagenet|wordnet"
         self.malist = "SLAM|CNN|R CNN|RCNN|RNN|LSTM|CTC|SOM|GAN|ICA|PCA|U NET|UNET|Nerf|SVM|Bagging|MOE|\
 Random forest|RF|KL divergence|DNN|GBM|VAE|ODE|PDE|CLIP"
 
@@ -41,6 +41,11 @@ Random forest|RF|KL divergence|DNN|GBM|VAE|ODE|PDE|CLIP"
 
     def wordfreq(self):
         for title in self.titles:
+            title = title.lower()
+            title = re.sub( r'-' , " ", title )
+            title = re.sub( r'&' , "and", title )
+            title = re.sub( r'sation' , "zation", title )
+            title = re.sub( r'ising' , "izing", title )
             """
             sepwords = self.seplist.split(title)
             for item in sepwords:
