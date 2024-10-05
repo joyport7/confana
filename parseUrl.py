@@ -453,8 +453,50 @@ class parseUrl:
         
         normal = True
 
-        return normal, title, author
+        return normal, author, title
  
+    def parseACL(self,url):
+        normal = False
+        author = []
+        title = []
+
+        #fname = re.sub("[\:\/\.]","_",url) + ".txt"
+        #url = self.site
+        print(url)
+        bs = self.beautifulsoup(url)
+        
+        blks = bs.find_all('span',{'class':"d-block"})
+
+        ii = 0
+        for blk in blks:
+            if ii < 2:
+                ii += 1
+                continue
+            else:
+                ii += 1
+            ttl = blk.find('a',{'class':'align-middle'}).get_text().strip()
+            if ttl == 'pdf':
+                continue
+            aublks = blk.find_all('a')
+            authors = []
+            jj = 0
+            for aublk in aublks:
+                if jj == 0:
+                    jj += 1
+                    continue
+                else:
+                    jj += 1
+                au = aublk.get_text().strip()
+                authors.append(au)
+            title.append(ttl)
+            author.append(authors)
+
+        #with open(fname, mode='w') as f:
+        #    f.write(str(bs.prettify()))
+        
+        normal = True
+        return normal, author, title
+
     def parseOpenReview(self,url):
         normal = False
         self.url = url
