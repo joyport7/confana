@@ -4,7 +4,8 @@ Scraping and analysis module for scientific conferences
 # support
 - CVPR, ICCV (CVF website)
 - ICRA (odd number year), IROS (papercept website)
-- Open review (ICRA/NeurIPS/...)
+- ACL (ACL/EMNLP/... )
+- Open Review (ICRA/NeurIPS/...)
 - Google scholar
 
 # requisite
@@ -12,10 +13,10 @@ Scraping and analysis module for scientific conferences
 - beautifulsoup
 
 # how to use
-- to be described
+- basically, to be described
 - parseUrl
   - scraping
-- parse
+- parseAT
   - to make an author-title list in conference proceedings
 - parseNAC
   - to make name-affiliation-citation list in the google scholar
