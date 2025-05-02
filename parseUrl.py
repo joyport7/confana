@@ -31,6 +31,15 @@ class parseUrl:
         
         self.sltime = 5
 
+    def egcap(self):
+        capabilities = {
+            "browserName": "MicrosoftEdge",
+            "ms:edgeOptions": {
+                "args": ["--headless"]
+            }
+        }
+        return capabilities
+
     def setNeurIPSop(self):
         yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
         print(yr[0])
@@ -108,6 +117,13 @@ class parseUrl:
             self.oralpt = 'accept-oral'
             self.posterpt = 'accept-poster'
             self.slpt = 'accept-spotlight'
+        elif yr[0] == '2025':
+            self.oralheld = True
+            self.slheld = True
+            self.posterheld = True
+            self.oralpt = 'accept-oral'
+            self.posterpt = 'accept-poster'
+            self.slpt = 'accept-spotlight'
 
     def setCoRLop(self):
         yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
@@ -140,37 +156,22 @@ class parseUrl:
             bs = []
             chopt = Options()
             #chopt.add_argument("--headless") # headless mode
-            driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
+            #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
+            capabilities = self.egcap()
+            driver = webdriver.Edge(executable_path='./msedgedriver', capabilities=capabilities)
             driver.get(url)
             time.sleep(self.sltime)
             
             soup = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
-            #fname = re.sub('[\:\/\?]','-',url) + '.txt'
-            #with open(fname, mode='w') as f:
-            #    f.write(str(soup.prettify()))
-
+            """
+            fname = re.sub('[\:\/\?]','-',url) + '.txt'
+            with open(fname, mode='w') as f:
+                f.write(str(soup.prettify()))
+            """
             bs.append(soup)
             a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
             elems = a_item.find_elements(By.TAG_NAME, ("nav"))
 
-
-            #if len(elems) != 0:
-            #    a_items = elems[0]
-            #    a_items = a_item.find_elements(By.CLASS_NAME, ("right-arrow"))
-            #    max_page = int(a_items[1].get_attribute("data-page-number"))
-            #    print(max_page,' pages')
-            #    print(end='#')
-
-            #    for ii in range(1,max_page):
-            #        print(end='#')
-            #        a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
-            #        a_item = a_item.find_element(By.TAG_NAME, ("nav"))
-            #        a_item = a_item.find_element(By.LINK_TEXT, str(ii+1))
-            #        a_item.click()
-            #        time.sleep(self.sltime)
-            #        bs.append(BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser'))
-                
-            #    print('\n')
             if len(elems) != 0:
                 a_item = elems[0]
                 try:
@@ -215,7 +216,6 @@ class parseUrl:
                         a_items = a_item.find_elements(By.TAG_NAME, ("a"))
                         ii += 1
 
-        #except driver.exceptions.RequestException as e:
         except WebDriverException as e:
             print("Error: ",e)
 
@@ -229,42 +229,21 @@ class parseUrl:
         #chopt = Options()
         #chopt.add_argument("--headless") # headless mode
         #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
-        #egopt = Options()
-        #egopt.add_argument("headless")
-        capabilities = {
-            "browserName": "MicrosoftEdge",
-            "ms:edgeOptions": {
-                "args": ["--headless"]
-            }
-        }
+        capabilities = self.egcap()
         driver = webdriver.Edge(executable_path='./msedgedriver', capabilities=capabilities) # locate appropriate webdriver in the executable-file directory
         fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",self.url) + ".txt"
 
-        bs = None
-        bs_oral = None
-        bs_sl = None
-        bs_poster = None
+        bs, bs_oral, bs_sl, bs_poster = None, None, None, None
 
-        if re.search('(ICLR|CoRL|NeurIPS)',self.conf):
-            oralheld = self.oralheld
-            slheld = self.slheld
-            posterheld = self.posterheld
-            oralpt = self.oralpt
-            slpt = self.slpt
-            posterpt = self.posterpt
+        if re.search("ICLR|CoRL|NeurIPS",self.conf):
+            oralheld, slheld, posterheld = (self.oralheld, self.slheld, self.posterheld)
+            oralpt, slpt, posterpt = (self.oralpt, self.slpt, self.posterpt)
 
-            #url_oral = self.url + '#' + oralpt
-            #url_sl = self.url + '#' + slpt
-            #url_poster = self.url + '#' + posterpt
             yr = re.search('[0-9][0-9][0-9][0-9]',self.url)
-            if yr[0] == '2024':
-                url_oral = self.url + '#tab-' + oralpt
-                url_sl = self.url + '#tab-' + slpt
-                url_poster = self.url + '#tab-' + posterpt
+            if yr[0] in ('2024','2025'):
+                url_oral, url_sl, url_poster = tuple(self.url + '#tab-' + s for s in (oralpt, slpt, posterpt))
             else:
-                url_oral = self.url + '#' + oralpt
-                url_sl = self.url + '#' + slpt
-                url_poster = self.url + '#' + posterpt
+                url_oral, url_sl, url_poster = tuple(self.url + '#' + s for s in (oralpt, slpt, posterpt))
 
             if oralheld:
                 bs_oral = self.selenium_sub(url_oral,oralpt)
@@ -272,9 +251,6 @@ class parseUrl:
                 bs_sl = self.selenium_sub(url_sl,slpt)
             if posterheld:
                 bs_poster = self.selenium_sub(url_poster,posterpt)
-
-            return bs, bs_oral, bs_poster, bs_sl
-
         else:
             try:
                 if os.path.isfile(fname):
@@ -289,10 +265,9 @@ class parseUrl:
             except WebDriverException as e:
                 print("Error: ",e)
             finally:
-                #driver.quit()
-                pass
+                driver.quit()
 
-            return bs
+        return bs, bs_oral, bs_poster, bs_sl
             
     def beautifulsoup(self,url):
         try:
@@ -375,12 +350,11 @@ class parseUrl:
 
     def parsePapercept(self,url):
         normal = False
+        author, title = [], [] 
         
         print(url)
         bs = self.beautifulsoup(url)
 
-        title = []
-        author = []
         ttlidx = 1
         
         sects = bs.find_all('tr',{'class':'pHdr'})
@@ -434,8 +408,8 @@ class parseUrl:
     
     def IEEERAS(self,url):
         normal = False
-        author = []
-        title = []
+        author, title = [], [] 
+
         maxpages = 1000
         for ii in range(1,maxpages):
             #url = 'https://ieeexplore.ieee.org/xpl/conhome/9811522/proceeding?isnumber=9811357&sortType=vol-only-seq&pageNumber='
@@ -465,8 +439,7 @@ class parseUrl:
  
     def parseACL(self,url):
         normal = False
-        author = []
-        title = []
+        author, title = [], [] 
 
         #fname = re.sub("[\:\/\.]","_",url) + ".txt"
         #url = self.site
@@ -507,11 +480,11 @@ class parseUrl:
 
     def parseOpenReview(self,url):
         normal = False
+        title_list, author_list = [], []
+
         self.url = url
         bs, bs_orals, bs_posters, bs_sls = self.selenium()
         
-        title_list = []
-        author_list = []
 
         #-----------
         numoral = 0
@@ -558,18 +531,9 @@ class parseUrl:
     
     def Gscholar(self,maxpage):
         normal = False
-        name = []
-        link = []
-        aff = []
-        citation = []
+        name, link, aff, citation = [], [], [], []
         ourl = self.site
-        stime = 7 # anti-ratelimit
-        capabilities = {
-            "browserName": "MicrosoftEdge",
-            "ms:edgeOptions": {
-                "args": ["--headless"]
-            }
-        }
+        capabilities = self.egcap()
 
         bRet = False
         for ii in range(0,maxpage):
@@ -590,7 +554,7 @@ class parseUrl:
                 if bRet or ii == 0:
                     driver = webdriver.Edge(executable_path='./msedgedriver', capabilities=capabilities) # locate appropriate webdriver in the executable-file directory
                     driver.get(url)
-                    time.sleep(stime)
+                    time.sleep(self.sltime)
                     bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
                     tmp = bs.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
                     url = re.sub('window\.location=|\'','',tmp['onclick'])
@@ -604,7 +568,7 @@ class parseUrl:
                 else:
                     a_item = driver.find_element(By.CSS_SELECTOR, '[aria-label="次へ"]')
                     a_item.click()
-                    time.sleep(stime)
+                    time.sleep(self.sltime)
                     bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
                     with open(fname, mode='w') as f:
                         f.write(str(bs.prettify()))
