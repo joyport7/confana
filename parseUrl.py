@@ -486,7 +486,6 @@ class parseUrl:
         bs, bs_orals, bs_posters, bs_sls = self.selenium()
         
 
-        #-----------
         numoral = 0
         if self.oralheld:
             for ii in range(0,len(bs_orals)):
@@ -499,7 +498,6 @@ class parseUrl:
                     title_list.append(tts[jj].get_text().strip())
                     author_list.append(aus[jj].get_text().strip().split(', '))
                 
-        #-----------
         numsl = 0
         if self.slheld:
             for ii in range(0,len(bs_sls)):
@@ -512,7 +510,6 @@ class parseUrl:
                     title_list.append(tts[jj].get_text().strip())
                     author_list.append(aus[jj].get_text().strip().split(', '))
         
-        #-----------
         numposter = 0
         if self.posterheld:
             for ii in range(0,len(bs_posters)):
@@ -537,11 +534,12 @@ class parseUrl:
 
         bRet = False
         for ii in range(0,maxpage):
+            print(ii)
             fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",ourl) + "_" + str(ii) + ".txt"
+            ftestname = self.cachedir + "/" + re.sub("[\:\/\.]","_",ourl) + "_" + str(ii) + "_test.txt"
             if os.path.isfile(fname):
                 with open(fname, encoding='utf-8') as f:
                     bs = BeautifulSoup(f.read(), 'html.parser')
-                    #onclick="window.location='/citations?view_op\x3dsearch_authors\x26hl\x3dja\x26mauthors\x3dlabel:computer_vision\x26after_author\x3d-2cKAHD2__8J\x26astart\x3d4110'" type="button">
                 tmp = bs.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
                 url = re.sub('window\.location=|\'','',tmp['onclick'])
                 url = re.sub('\\\\x3d','=',url)
@@ -556,23 +554,31 @@ class parseUrl:
                     driver.get(url)
                     time.sleep(self.sltime)
                     bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
-                    tmp = bs.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
+                    with open(ftestname, mode='w') as f:
+                        f.write(str(bs.prettify()))
+                    driver.quit()
+ 
+                    tmp = tmp.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
+
                     url = re.sub('window\.location=|\'','',tmp['onclick'])
                     url = re.sub('\\\\x3d','=',url)
                     url = re.sub('\\\\x26','&',url)
                     url = 'https://scholar.google.jp' + url
+
                     bRet = True
-                    with open(fname, mode='w') as f:
-                        f.write(str(bs.prettify()))
-                    driver.quit()
+
+                    os.rename(ftestname,fname)
+
                 else:
                     a_item = driver.find_element(By.CSS_SELECTOR, '[aria-label="次へ"]')
                     a_item.click()
                     time.sleep(self.sltime)
+
                     bs = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
                     with open(fname, mode='w') as f:
                         f.write(str(bs.prettify()))
                     bRet = False
+                    
             names = bs.find_all('h3',{'class':'gs_ai_name'})
             affs = bs.find_all('div',{'class':'gs_ai_aff'})
             cits = bs.find_all('div',{'class':'gs_ai_cby'})
