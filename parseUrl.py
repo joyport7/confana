@@ -43,13 +43,13 @@ class parseUrl:
     def setNeurIPSop(self):
         yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
         print(yr[0])
-        if yr[0] == '2023':
+        if yr[0] == '2021':
             self.oralheld = True
             self.slheld = True
             self.posterheld = True
-            self.oralpt = 'accept-oral'
-            self.posterpt = 'accept-poster'
-            self.slpt = 'accept-spotlight'
+            self.oralpt = 'oral-presentations'
+            self.posterpt = 'poster-presentations'
+            self.slpt = 'spotlight-presentations'
         elif yr[0] == '2022':
             self.oralheld = True
             self.slheld = False
@@ -57,13 +57,20 @@ class parseUrl:
             self.oralpt = 'accepted-papers'
             self.posterpt = ''
             self.slpt = ''
-        elif yr[0] == '2021':
+        elif yr[0] == '2023':
             self.oralheld = True
             self.slheld = True
             self.posterheld = True
-            self.oralpt = 'oral-presentations'
-            self.posterpt = 'poster-presentations'
-            self.slpt = 'spotlight-presentations'
+            self.oralpt = 'accept-oral'
+            self.posterpt = 'accept-poster'
+            self.slpt = 'accept-spotlight'
+        elif yr[0] == '2024':
+            self.oralheld = True
+            self.slheld = True
+            self.posterheld = True
+            self.oralpt = 'accept-oral'
+            self.posterpt = 'accept-poster'
+            self.slpt = 'accept-spotlight'
 
     def setICLRop(self):
         yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
@@ -147,6 +154,13 @@ class parseUrl:
             self.posterheld = True
             self.oralpt = 'accept--oral-'
             self.posterpt = 'accept--poster-'
+            self.slpt = '-'
+        elif yr[0] == '2024':
+            self.oralheld = True
+            self.slheld = False #note that there was spotlight sessions, but here these is only a flag accept/reject 
+            self.posterheld = False #note that there was poster sessions, but here these only a flag accept/reject 
+            self.oralpt = 'accept'
+            self.posterpt = '-'
             self.slpt = '-'
 
     def selenium_sub(self,url,pt):
