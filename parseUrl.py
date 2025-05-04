@@ -548,7 +548,7 @@ class parseUrl:
 
         bRet = False
         for ii in range(0,maxpage):
-            print(ii)
+            #print(ii)
             fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",ourl) + "_" + str(ii) + ".txt"
             ftestname = self.cachedir + "/" + re.sub("[\:\/\.]","_",ourl) + "_" + str(ii) + "_test.txt"
             if os.path.isfile(fname):
@@ -571,9 +571,9 @@ class parseUrl:
                     with open(ftestname, mode='w') as f:
                         f.write(str(bs.prettify()))
                     driver.quit()
- 
+                    
                     tmp = bs.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
-                    url = re.sub('window\.location=|\'','',tmp['onclick'])
+                    url = re.sub('window\.location=|\'','',tmp['onclick']) # when this line outputs an error, check the ratelimit. 
                     url = re.sub('\\\\x3d','=',url)
                     url = re.sub('\\\\x26','&',url)
                     url = 'https://scholar.google.jp' + url
