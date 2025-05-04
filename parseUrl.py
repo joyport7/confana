@@ -572,8 +572,7 @@ class parseUrl:
                         f.write(str(bs.prettify()))
                     driver.quit()
  
-                    tmp = tmp.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
-
+                    tmp = bs.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
                     url = re.sub('window\.location=|\'','',tmp['onclick'])
                     url = re.sub('\\\\x3d','=',url)
                     url = re.sub('\\\\x26','&',url)
