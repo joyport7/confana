@@ -9,6 +9,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 import re
+from functools import lru_cache
 
 class parseUrl:
     def __init__(self, *args):
@@ -41,127 +42,41 @@ class parseUrl:
         return capabilities
 
     def setNeurIPSop(self):
-        yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
-        print(yr[0])
-        if yr[0] == '2021':
-            self.oralheld = True
-            self.slheld = True
-            self.posterheld = True
-            self.oralpt = 'oral-presentations'
-            self.posterpt = 'poster-presentations'
-            self.slpt = 'spotlight-presentations'
-        elif yr[0] == '2022':
-            self.oralheld = True
-            self.slheld = False
-            self.posterheld = False
-            self.oralpt = 'accepted-papers'
-            self.posterpt = ''
-            self.slpt = ''
-        elif yr[0] == '2023':
-            self.oralheld = True
-            self.slheld = True
-            self.posterheld = True
-            self.oralpt = 'accept-oral'
-            self.posterpt = 'accept-poster'
-            self.slpt = 'accept-spotlight'
-        elif yr[0] == '2024':
-            self.oralheld = True
-            self.slheld = True
-            self.posterheld = True
-            self.oralpt = 'accept-oral'
-            self.posterpt = 'accept-poster'
-            self.slpt = 'accept-spotlight'
+        options = {
+            '2021': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'oral-presentations', 'posterpt': 'poster-presentations', 'slpt': 'spotlight-presentations'},
+            '2022': {'oralheld': True, 'slheld': False, 'posterheld': False, 'oralpt': 'accepted-papers', 'posterpt': '', 'slpt': ''},
+            '2023': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'},
+            '2024': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'}
+        }
+        yr = re.search('\d{4}',self.conf).group()
+        if yr in options:
+            self.__dict__.update(options[yr])
 
     def setICLRop(self):
-        yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
-        print(yr[0])
-        if yr[0] == '2018':
-            self.oralheld = True
-            self.slheld = False
-            self.posterheld = True
-            self.oralpt = 'accepted-oral-papers'
-            self.posterpt = 'accepted-poster-papers'
-            self.slpt = ''
-        elif yr[0] == '2019':
-            self.oralheld = True
-            self.slheld = False
-            self.posterheld = True
-            self.oralpt = 'oral-presentations'
-            self.posterpt = 'poster-presentations'
-            self.slpt = ''
-        elif yr[0] == '2020':
-            self.oralheld = True
-            self.slheld = True
-            self.posterheld = True
-            self.oralpt = 'oral-presentations'
-            self.posterpt = 'poster-presentations'
-            self.slpt = 'spotlight-presentations'
-        elif yr[0] == '2021':
-            self.oralheld = True
-            self.slheld = True
-            self.posterheld = True
-            self.oralpt = 'oral-presentations'
-            self.posterpt = 'poster-presentations'
-            self.slpt = 'spotlight-presentations'
-        elif yr[0] == '2022':
-            self.oralheld = True
-            self.slheld = True
-            self.posterheld = True
-            self.oralpt = 'oral-submissions'
-            self.posterpt = 'poster-submissions'
-            self.slpt = 'spotlight-submissions'
-        elif yr[0] == '2023':
-            self.oralheld = True
-            self.slheld = True
-            self.posterheld = True
-            self.oralpt = 'notable-top-5-'
-            self.posterpt = 'poster'
-            self.slpt = 'notable-top-25-'
-        elif yr[0] == '2024':
-            self.oralheld = True
-            self.slheld = True
-            self.posterheld = True
-            self.oralpt = 'accept-oral'
-            self.posterpt = 'accept-poster'
-            self.slpt = 'accept-spotlight'
-        elif yr[0] == '2025':
-            self.oralheld = True
-            self.slheld = True
-            self.posterheld = True
-            self.oralpt = 'accept-oral'
-            self.posterpt = 'accept-poster'
-            self.slpt = 'accept-spotlight'
+        options = {
+            '2018': {'oralheld': True, 'slheld': False, 'posterheld': True, 'oralpt': 'accepted-oral-papers', 'posterpt': 'accepted-poster-papers', 'slpt': ''},
+            '2019': {'oralheld': True, 'slheld': False, 'posterheld': True, 'oralpt': 'oral-presentations', 'posterpt': 'poster-presentations', 'slpt': ''},
+            '2020': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'oral-presentations', 'posterpt': 'poster-presentations', 'slpt': 'spotlight-presentations'},
+            '2021': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'oral-presentations', 'posterpt': 'poster-presentations', 'slpt': 'potlight-presentations'},
+            '2022': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'oral-submissions', 'posterpt': 'poster-submissions', 'slpt': 'spotlight-submissions'},
+            '2023': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'notable-top-5-', 'posterpt': 'poster', 'slpt': 'notable-top-25-'},
+            '2024': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'},
+            '2025': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'}
+        }
+        yr = re.search('\d{4}',self.conf).group()
+        if yr in options:
+            self.__dict__.update(options[yr])
 
     def setCoRLop(self):
-        yr = re.search('[0-9][0-9][0-9][0-9]',self.conf)
-        if yr[0] == '2021':
-            self.oralheld = True
-            self.slheld = False
-            self.posterheld = True
-            self.oralpt = 'accept--oral-'
-            self.posterpt = 'accept--poster-'
-            self.slpt = '-'
-        elif yr[0] == '2022':
-            self.oralheld = True
-            self.slheld = False
-            self.posterheld = True
-            self.oralpt = 'accept--oral-'
-            self.posterpt = 'accept--poster-'
-            self.slpt = '-'
-        elif yr[0] == '2023':
-            self.oralheld = True
-            self.slheld = False
-            self.posterheld = True
-            self.oralpt = 'accept--oral-'
-            self.posterpt = 'accept--poster-'
-            self.slpt = '-'
-        elif yr[0] == '2024':
-            self.oralheld = True
-            self.slheld = False #note that there was spotlight sessions, but here these is only a flag accept/reject 
-            self.posterheld = False #note that there was poster sessions, but here these only a flag accept/reject 
-            self.oralpt = 'accept'
-            self.posterpt = '-'
-            self.slpt = '-'
+        yr = re.search('\d{4}',self.conf).group()
+        options = {
+            '2021': {'oralheld': True, 'slheld': False, 'posterheld': True, 'oralpt': 'accept--oral-', 'posterpt': 'accept--poster-', 'slpt': '-'},
+            '2022': {'oralheld': True, 'slheld': False, 'posterheld': True, 'oralpt': 'accept--oral-', 'posterpt': 'accept--poster-', 'slpt': '-'},
+            '2023': {'oralheld': True, 'slheld': False, 'posterheld': True, 'oralpt': 'accept--oral-', 'posterpt': 'accept--poster-', 'slpt': '-'},
+            '2024': {'oralheld': True, 'slheld': False, 'posterheld': False, 'oralpt': 'accept', 'posterpt': '-', 'slpt': '-'}
+        }
+        if yr in options:
+            self.__dict__.update(options[yr])
 
     def selenium_sub(self,url,pt):
         
@@ -239,21 +154,22 @@ class parseUrl:
         return bs
 
     def selenium(self):
+        bs, bs_oral, bs_sl, bs_poster = None, None, None, None
         sltime = self.sltime
+        fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",self.url) + ".txt"
+
         #chopt = Options()
         #chopt.add_argument("--headless") # headless mode
         #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
         capabilities = self.egcap()
         driver = webdriver.Edge(executable_path='./msedgedriver', capabilities=capabilities) # locate appropriate webdriver in the executable-file directory
-        fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",self.url) + ".txt"
 
-        bs, bs_oral, bs_sl, bs_poster = None, None, None, None
 
         if re.search("ICLR|CoRL|NeurIPS",self.conf):
             oralheld, slheld, posterheld = (self.oralheld, self.slheld, self.posterheld)
             oralpt, slpt, posterpt = (self.oralpt, self.slpt, self.posterpt)
 
-            yr = re.search('[0-9][0-9][0-9][0-9]',self.url)
+            yr = re.search('\d{4}',self.url)
             if yr[0] in ('2024','2025'):
                 url_oral, url_sl, url_poster = tuple(self.url + '#tab-' + s for s in (oralpt, slpt, posterpt))
             else:
@@ -283,14 +199,16 @@ class parseUrl:
 
         return bs, bs_oral, bs_poster, bs_sl
             
+    @lru_cache(maxsize=128)
     def beautifulsoup(self,url):
         try:
             response = requests.get(url)
+            response.raise_for_status()
         except requests.exceptions.RequestException as e:
             print("Error: ",e)
+            return None
 
-        bs = BeautifulSoup(response.text, 'html.parser')
-        return bs
+        return BeautifulSoup(response.text, 'html.parser')
     
     def parseCVFsite(self,url):
         normal = False
@@ -464,11 +382,9 @@ class parseUrl:
 
         ii = 0
         for blk in blks:
+            ii += 1
             if ii < 2:
-                ii += 1
                 continue
-            else:
-                ii += 1
             ttl = blk.find('a',{'class':'align-middle'}).get_text().strip()
             if ttl == 'pdf':
                 continue
@@ -476,11 +392,9 @@ class parseUrl:
             authors = []
             jj = 0
             for aublk in aublks:
+                jj += 1
                 if jj == 0:
-                    jj += 1
                     continue
-                else:
-                    jj += 1
                 au = aublk.get_text().strip()
                 authors.append(au)
             title.append(ttl)
@@ -617,7 +531,7 @@ class parseUrl:
             nmindcite[nm] = 0
             self.url = f'https://scholar.google.jp{linksuf}'
             print(self.url)
-            bs = self.selenium()
+            bs, _, _, _ = self.selenium()
 
             gfname = re.split('\s',nm)
             if len(gfname)==2:
