@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 import re
 from functools import lru_cache
+import csv
 
 class parseUrl:
     def __init__(self, *args):
@@ -511,9 +512,9 @@ class parseUrl:
             cits = bs.find_all('div',{'class':'gs_ai_cby'})
             for jj in range(0,len(names)):
                 name.append(re.sub('\n|\s\(.+?\)|\(.+?\)|\s\(.+?）|\s（.+?）|（.+?）$|\s\/.+','',names[jj].get_text().strip()))
-                link.append(names[jj].find('a').get('href'))
+                link.append('https://scholar.google.jp'+names[jj].find('a').get('href'))
                 af = affs[jj].get_text().strip()
-                af = re.sub('.*Professor.*, |.*Professor.* of .+?, |.*Professor.* of |, .*Professor|\s*\(.+?\)\s*|.+? at |.*Scientist, |.*Researcher, |.*Engineering, |.*Science, |Group, |.*Robotics, |.*Vision, |, CEO|, Founder','',af).strip()
+                #af = re.sub('.*Professor.*, |.*Professor.* of .+?, |.*Professor.* of |, .*Professor|\s*\(.+?\)\s*|.+? at |.*Scientist, |.*Researcher, |.*Engineering, |.*Science, |Group, |.*Robotics, |.*Vision, |, CEO|, Founder','',af).strip()
                 aff.append(af)
                 citation.append(int(re.sub('被引用数: ','',cits[jj].get_text())))
         
@@ -527,9 +528,8 @@ class parseUrl:
         for ii in range(0,len(names)):
             print(f'{ii}/{len(names)}')
             nm = names[ii]
-            linksuf = nmlinks[ii]
+            self.url = nmlinks[ii]
             nmindcite[nm] = 0
-            self.url = f'https://scholar.google.jp{linksuf}'
             print(self.url)
             bs, _, _, _ = self.selenium()
 
@@ -554,9 +554,9 @@ class parseUrl:
         normal = True
         return normal, nmindcite
 
-    def csvwrite(self,fname, *lists):
+    def csvwrite(self, fname, *lists):
         with open(fname, 'w', encoding = "utf_8") as file:
+            writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
             for items in zip(*lists):
-                line = '\t'.join(str(item) for item in items) + '\n'
-                file.write(line)
-                
+                writer.writerow(items) 
+               
