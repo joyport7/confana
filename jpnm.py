@@ -52,7 +52,7 @@ Son|Sohn|Souza|Suh|Sukan|Sundararaman|Suri|Susan|Suin|Tandon|Tasan|Tiwari|Toneka
 Uban|Ure|Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yu[eh]|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zontak|Zou|\
 (Ch|Sh|[YSHFOLGMB])[uo]|[YSHFOLGMKZ]e|[EH]o|An|([TYHGW]|[BDL]|Shu)ai|[BGHYMR]ao|([YRG]u|Ch|[LYHTWGNM])an|[BNJ]i|Jia|[JM]iao|[GS]ui|[YS]un|[KGZ]uo|[LM]ei|Heo|[YH]ou|Choi|Yoo|Yoon)"
         self.snjpname="Ren Nie|Dan Nie|Jin Jin|Ran Tao|Shu Teo|Ran Ben|Yuhe Jin|Jin Tao|Yu Tao|Jan Kotera|Ken Mai|Meina Kan|Jinko Kanno|Rui Tao|Ao Jin|Jun Dan|Rina Kumari|Jun Jin|Rui Ai|Rui Jin|\
-Ana Maria Tome|Shu Tao|Jinrui Gou|Taiyu Ban|Miru Jun|Yu Jin" \
+Ana Maria Tome|Shu Tao|Jinrui Gou|Taiyu Ban|Miru Jun|Yu Jin"
         self.snjppat="^"+self.snjpgpat+"\s|\s"+self.snjpfpat+"$|"+self.snjpname 
         self.dlm=",\s"
 
