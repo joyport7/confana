@@ -26,7 +26,7 @@ A[ae]*ron|Abayomi|Aman|Amanda|Ameya|Aniket|Annan|Anant|Ami[tn]|Anita|Anki|Ankita
 Bao|Babak|Bee|Beibei|Benaim|Benjamin|Bibit|Bin|Binbin|Bodo|Bojan|Boyu|Burak|Bukun|Burin|\
 Chaehun|Chajin|Chanjin|Chau|Chiara|Da|Dabin|Dakai|Dami[ae]n|Dann*a|Dario|Debora|Depanshu|Derya|Dohwan|Dominik|Dongoh|Doreen|Doron|\
 Ebuka|Edo|Erik|Ehsan|Eshaan|Eugene|Ewa|Eze|Gene|Guanyu|Gyumin|Gunawan|\
-Ha|Haechan|Haian|Hakan|Han|Hanbin|Hani|Hanna|Hannah|Hasan|He|Heiko|Henri|Hemant|Hogun|Hooman|Houman|Hugo|\
+Ha|Haechan|Haian|Hakan|Han|Hanbin|Hani|Hanan|Hanna|Hannah|Hasan|He|Heiko|Henri|Hemant|Hogun|Hooman|Houman|Hugo|\
 Idoia|Inaki|Inkyu|Imin|Itai|Isha|Jamie|Jan|Jana|Jane|Janne|Jaron|Jason|Jaya|Jikai|Jina|Jimin|Jirak|Jose|Johan|John|Joao|Joko|Joni|Ju|Juan|Junni|Juho|Juhee|Junho|Junhyuk|\
 Kaan|Kannan|Kanika|Karima|K[ai]ran|Kate|Keda|Kenan|Kenneth|Kiana|Ki[ae]n|Kochise|Koushik|Leda|Lorenzo|\
 Ma|Maatei|Matteo|Madonna|Mainak|Man|Manikanta|Marek|Marion|Masha|Matan|Mateja|Matt|Mayank|Mazen|Masoumeh|Meena|Meike|Mengu|Menoua|Miao|Mihai|Min|Minho*|Minji|Min[jJ]oon|Min[jJ]un*|Minsu|Min[kg]yo|Mu|Mubarak|Moein|Mohi|Mohit|Mohsen|Moin|Monika|Moon|Moonsoo|Moran|Mouna|Musa|Murat|\
@@ -34,12 +34,12 @@ Na|Naama|Nageen|Namo|Nariman|Neha|Nikita|Nima|Nimita|Nirat|Nitin|Noah|Nona|Noosh
 Okan|Onat|Oren|Ori|Oladayo|Osama|Oya|Pere|Pouya|Pu|Ramana|Rami|Ranjan|Rauno|Renshuai|Reuben|Reza|Rezaei|Rishi|Ruben|Rohit|Roi|Rosa|Ruwan|Ruhi|Ruinan|Ryan|\
 Sachin|Sage|Sagie|Saket|anchari|Sanda|Saikat|Sandaru|Saman|Samit*|Samitha|Samira|Sarah|Sayan|Sean|Seba|Sek|Semion|Sen|Shagan|Shaurya|Shasha|Shayak|Shayan|Shai|Shi|Shichao|Shirine|Shishira|Shujon|Soomin|Sun|Suman|Suranjana|Suren|Sunita|\
 Taha|Taman|Tanaya|Tapani|Teresa|TarashaTeodora|\
-Udana|Wa[hi]|Yan|Yake|Yani|Yanrui|Yahya|Yangyu|Yao|Yaochu|Yasaman|Yohan|Yuanbiao|Yue|Yuhan|Yumin|Yun|Yunji|Yunmo|Yuru|Yunhao|Zarena|Zarana|Zeki|Zerui|Zeyu)"
+Udana|Umit|Wa[hi]|Yan|Yake|Yani|Yanrui|Yahya|Yangyu|Yao|Yaochu|Yasaman|Yohan|Yuanbiao|Yue|Yuhan|Yumin|Yun|Yunji|Yunmo|Yuru|Yunhao|Zarena|Zarana|Zeki|Zerui|Zeyu)"
         self.snjpfpat="\
 (Aakanksha|Achan|Acharya|Arora|Ahuja|Aksak|Akshara|Amani|Amini|Aminzadeh|Amit|Amin|Aneke|Anson|Antebi|Aran|Ari|Ariyanto|Aryan|\
-Ba|Baka|Badea|Basu|Bianchini|Bilen|Bahadori|Bandara|Bauza|Bedayat|Ben|Bennett|Benton|Benjamin|Benson|Bera|Bian|Bianchi|Bin|Birant|Biton|Bok|Boneh|Bouma|Bouman|Bui|\
+Ba|Baka|Badea|Basaran|Basu|Bianchini|Bilen|Bahadori|Bandara|Bauza|Bedayat|Ben|Bennett|Benton|Benjamin|Benson|Bera|Bian|Bianchi|Bin|Birant|Biton|Bok|Boneh|Bouma|Bouman|Bui|\
 Chisari|Chai|Cho[ou]|Ch[iu]|Chiu|Chikina|Chien|\
-Dagan|Desai|Dami[ae]n|Damak|Damaine|Dewan|Do|Dorent|Doshi|Eak|Egiazarian|Emara|Emonet|Erat|Esen|Gat|Gia|Gini|Gianchandani|Gu|Gubina|Guha|Guhan|Guedon|\
+Dagan|Desai|Dami[ae]n|Damak|Damaine|Dewan|Do|Dorent|Doshi|Eak|Egiazarian|Emara|Emonet|Erat|Esen|Gani|Gat|Gia|Gini|Gianchandani|Gu|Gubina|Guha|Guhan|Guedon|\
 Ha|Hanan|Hariyono|Hakimi|Hanna|Hansen|Heidari|Himayat|Huh|Hui|Huo|Ho|Ie|Imani|Inan|Inie|Inza|\
 Jagadeesan|Jahani|Jain|Jaipuria|Jamnik|Janda|Jansen|Jayasuriya|Juge|John|Johnson|Joo|Joshi|Ju|Junge|Juan|\
 Kao|Kahn|Kahnsari|Kate|Kazan|Kazemi|Kee|Keshishian|Khurana|Ki|Kiani|Kijak|Kim|Kishore|Koren|Koo|Kunze|Kumar|Kumawat|Laina|\
@@ -52,7 +52,7 @@ Son|Sohn|Souza|Suh|Sukan|Sundararaman|Suri|Susan|Suin|Tandon|Tasan|Tiwari|Toneka
 Uban|Ure|Wanchoo|Watson|Yaesoubi|Yogatama|Yoran|Yu[eh]|Yu[ae]n|Zada|Zabih|Zadeh|Zaharia|Zontak|Zou|\
 (Ch|Sh|[YSHFOLGMB])[uo]|[YSHFOLGMKZ]e|[EH]o|An|([TYHGW]|[BDL]|Shu)ai|[BGHYMR]ao|([YRG]u|Ch|[LYHTWGNM])an|[BNJ]i|Jia|[JM]iao|[GS]ui|[YS]un|[KGZ]uo|[LM]ei|Heo|[YH]ou|Choi|Yoo|Yoon)"
         self.snjpname="Ren Nie|Dan Nie|Jin Jin|Ran Tao|Shu Teo|Ran Ben|Yuhe Jin|Jin Tao|Yu Tao|Jan Kotera|Ken Mai|Meina Kan|Jinko Kanno|Rui Tao|Ao Jin|Jun Dan|Rina Kumari|Jun Jin|Rui Ai|Rui Jin|\
-Ana Maria Tome|Shu Tao|Jinrui Gou|Taiyu Ban|Miru Jun"
+Ana Maria Tome|Shu Tao|Jinrui Gou|Taiyu Ban|Miru Jun|Yu Jin" \
         self.snjppat="^"+self.snjpgpat+"\s|\s"+self.snjpfpat+"$|"+self.snjpname 
         self.dlm=",\s"
 
