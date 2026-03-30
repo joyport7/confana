@@ -5,9 +5,10 @@ import requests
 import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.edge.options import Options
+from selenium.webdriver.edge.service import Service
 import re
 from functools import lru_cache
 import csv
@@ -47,9 +48,10 @@ class parseUrl:
             '2021': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'oral-presentations', 'posterpt': 'poster-presentations', 'slpt': 'spotlight-presentations'},
             '2022': {'oralheld': True, 'slheld': False, 'posterheld': False, 'oralpt': 'accepted-papers', 'posterpt': '', 'slpt': ''},
             '2023': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'},
-            '2024': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'}
+            '2024': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'},
+            '2025': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'}
         }
-        yr = re.search('\d{4}',self.conf).group()
+        yr = re.search(r'\d{4}',self.conf).group()
         if yr in options:
             self.__dict__.update(options[yr])
 
@@ -62,14 +64,15 @@ class parseUrl:
             '2022': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'oral-submissions', 'posterpt': 'poster-submissions', 'slpt': 'spotlight-submissions'},
             '2023': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'notable-top-5-', 'posterpt': 'poster', 'slpt': 'notable-top-25-'},
             '2024': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'},
-            '2025': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'}
+            '2025': {'oralheld': True, 'slheld': True, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': 'accept-spotlight'},
+            '2026': {'oralheld': True, 'slheld': False, 'posterheld': True, 'oralpt': 'accept-oral', 'posterpt': 'accept-poster', 'slpt': ''}
         }
-        yr = re.search('\d{4}',self.conf).group()
+        yr = re.search(r'\d{4}',self.conf).group()
         if yr in options:
             self.__dict__.update(options[yr])
 
     def setCoRLop(self):
-        yr = re.search('\d{4}',self.conf).group()
+        yr = re.search(r'\d{4}',self.conf).group()
         options = {
             '2021': {'oralheld': True, 'slheld': False, 'posterheld': True, 'oralpt': 'accept--oral-', 'posterpt': 'accept--poster-', 'slpt': '-'},
             '2022': {'oralheld': True, 'slheld': False, 'posterheld': True, 'oralpt': 'accept--oral-', 'posterpt': 'accept--poster-', 'slpt': '-'},
@@ -84,20 +87,17 @@ class parseUrl:
         print(url)
         try:
             bs = []
-            chopt = Options()
-            #chopt.add_argument("--headless") # headless mode
-            #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
-            capabilities = self.egcap()
-            driver = webdriver.Edge(executable_path='./msedgedriver', capabilities=capabilities)
+            option = Options()
+            option.add_argument("--headless") # headless mode
+            service = Service('./msedgedriver')
+            driver = webdriver.Edge(service = service, options = option)
             driver.get(url)
             time.sleep(self.sltime)
             
             soup = BeautifulSoup(driver.page_source.encode('utf-8'), 'html.parser')
-            """
-            fname = re.sub('[\:\/\?]','-',url) + '.txt'
-            with open(fname, mode='w') as f:
-                f.write(str(soup.prettify()))
-            """
+            #fname = re.sub(r'[\:\/\?]','-',url) + '.txt'
+            #with open(fname, mode='w') as f:
+            #    f.write(str(soup.prettify()))
             bs.append(soup)
             a_item = driver.find_element(By.CSS_SELECTOR, ("div[id="+pt+"]"))
             elems = a_item.find_elements(By.TAG_NAME, ("nav"))
@@ -157,21 +157,19 @@ class parseUrl:
     def selenium(self):
         bs, bs_oral, bs_sl, bs_poster = None, None, None, None
         sltime = self.sltime
-        fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",self.url) + ".txt"
+        fname = self.cachedir + r"/" + re.sub(r"[\:\/\.]",r"_",self.url) + ".txt"
 
-        #chopt = Options()
-        #chopt.add_argument("--headless") # headless mode
-        #driver = webdriver.Chrome(executable_path='./chromedriver',options=chopt) # locate appropriate webdriver in the executable-file directory
-        capabilities = self.egcap()
-        driver = webdriver.Edge(executable_path='./msedgedriver', capabilities=capabilities) # locate appropriate webdriver in the executable-file directory
-
+        option = Options()
+        option.add_argument("--headless") # headless mode
+        service = Service('./msedgedriver')
+        driver = webdriver.Edge(service=service, options=option) # locate appropriate webdriver in the executable-file directory
 
         if re.search("ICLR|CoRL|NeurIPS",self.conf):
             oralheld, slheld, posterheld = (self.oralheld, self.slheld, self.posterheld)
             oralpt, slpt, posterpt = (self.oralpt, self.slpt, self.posterpt)
 
-            yr = re.search('\d{4}',self.url)
-            if yr[0] in ('2024','2025'):
+            yr = re.search(r'\d{4}',self.url)
+            if int(yr[0]) >= 2023:
                 url_oral, url_sl, url_poster = tuple(self.url + '#tab-' + s for s in (oralpt, slpt, posterpt))
             else:
                 url_oral, url_sl, url_poster = tuple(self.url + '#' + s for s in (oralpt, slpt, posterpt))
@@ -226,11 +224,11 @@ class parseUrl:
             if authors:
                 aut = []
                 for au in authors:
-                    au = re.sub('^[\t\s]*$','',au.get_text())
-                    au = re.sub('\n','',au)
+                    au = re.sub(r'^[\t\s]*$','',au.get_text())
+                    au = re.sub(r'\n','',au)
                     if au != '':
-                        au = re.sub('\s*,\s*','',au)
-                        aut.append(re.sub('^\s','',au))
+                        au = re.sub(r'\s*,\s*','',au)
+                        aut.append(re.sub(r'^\s','',au))
                 author.append(aut)
                 try:
                     title.append(titles[ii].get_text())
@@ -309,7 +307,7 @@ class parseUrl:
             except:
                 continue
                 
-            ttl = re.sub('\s\(.+','',ttl)
+            ttl = re.sub(r'\s\(.+','',ttl)
             ttlidx += 1
             title.append(ttl)
             
@@ -348,7 +346,7 @@ class parseUrl:
             #url = 'https://ieeexplore.ieee.org/xpl/conhome/9811522/proceeding?isnumber=9811357&sortType=vol-only-seq&pageNumber='
 
             turl=f'{url}{ii}'
-            fname = re.sub("[\:\/\.]","_",turl) + ".txt"
+            fname = re.sub(r"[\:\/\.]","_",turl) + ".txt"
             print(turl)
             bs = self.selenium(turl,fname)
             noresult = bs.find_all('li',{'class':'article-list-item no-results'})
@@ -359,10 +357,10 @@ class parseUrl:
             for blk in blks:
                 aublk = blk.find('p',{'class':'author text-base-md-lh'})
                 if aublk:
-                    ttl = re.sub('^\s+|[\n\t]','',blk.find('h2').get_text())
-                    ttl = re.sub('\s*$','',ttl)
+                    ttl = re.sub(r'^\s+|[\n\t]','',blk.find('h2').get_text())
+                    ttl = re.sub(r'\s*$','',ttl)
                     authors = aublk.get_text().strip()
-                    authors = re.sub('\s+;\s+',',',authors)
+                    authors = re.sub(r'\s+;\s+',',',authors)
                     author.append(re.split(',',authors))
                     title.append(ttl)
         
@@ -464,15 +462,15 @@ class parseUrl:
         bRet = False
         for ii in range(0,maxpage):
             #print(ii)
-            fname = self.cachedir + "/" + re.sub("[\:\/\.]","_",ourl) + "_" + str(ii) + ".txt"
-            ftestname = self.cachedir + "/" + re.sub("[\:\/\.]","_",ourl) + "_" + str(ii) + "_test.txt"
+            fname = self.cachedir + r"/" + re.sub(r"[\:\/\.]","_",ourl) + "_" + str(ii) + ".txt"
+            ftestname = self.cachedir + r"/" + re.sub(r"[\:\/\.]","_",ourl) + "_" + str(ii) + "_test.txt"
             if os.path.isfile(fname):
                 with open(fname, encoding='utf-8') as f:
                     bs = BeautifulSoup(f.read(), 'html.parser')
                 tmp = bs.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
-                url = re.sub('window\.location=|\'','',tmp['onclick'])
-                url = re.sub('\\\\x3d','=',url)
-                url = re.sub('\\\\x26','&',url)
+                url = re.sub(r'window\.location=|\'','',tmp['onclick'])
+                url = re.sub(r'\\\\x3d','=',url)
+                url = re.sub(r'\\\\x26','&',url)
                 url = 'https://scholar.google.jp' + url
                 bRet = True
             else:
@@ -488,9 +486,9 @@ class parseUrl:
                     driver.quit()
                     
                     tmp = bs.find('button',{'class':'gs_btnPR gs_in_ib gs_btn_half gs_btn_lsb gs_btn_srt gsc_pgn_pnx'})
-                    url = re.sub('window\.location=|\'','',tmp['onclick']) # when this line outputs an error, check the ratelimit. 
-                    url = re.sub('\\\\x3d','=',url)
-                    url = re.sub('\\\\x26','&',url)
+                    url = re.sub(r'window\.location=|\'','',tmp['onclick']) # when this line outputs an error, check the ratelimit. 
+                    url = re.sub(r'\\\\x3d','=',url)
+                    url = re.sub(r'\\\\x26','&',url)
                     url = 'https://scholar.google.jp' + url
 
                     bRet = True
@@ -511,8 +509,8 @@ class parseUrl:
             affs = bs.find_all('div',{'class':'gs_ai_aff'})
             cits = bs.find_all('div',{'class':'gs_ai_cby'})
             for jj in range(0,len(names)):
-                name.append(re.sub('\n|\s\(.+?\)|\(.+?\)|\s\(.+?）|\s（.+?）|（.+?）$|\s\/.+','',names[jj].get_text().strip()))
-                link.append('https://scholar.google.jp'+names[jj].find('a').get('href'))
+                name.append(re.sub(r'\n|\s\(.+?\)|\(.+?\)|\s\(.+?）|\s（.+?）|（.+?）$|\s\/.+','',names[jj].get_text().strip()))
+                link.append(r'https://scholar.google.jp'+names[jj].find('a').get('href'))
                 af = affs[jj].get_text().strip()
                 #af = re.sub('.*Professor.*, |.*Professor.* of .+?, |.*Professor.* of |, .*Professor|\s*\(.+?\)\s*|.+? at |.*Scientist, |.*Researcher, |.*Engineering, |.*Science, |Group, |.*Robotics, |.*Vision, |, CEO|, Founder','',af).strip()
                 aff.append(af)
@@ -533,7 +531,7 @@ class parseUrl:
             print(self.url)
             bs, _, _, _ = self.selenium()
 
-            gfname = re.split('\s',nm)
+            gfname = re.split(r'\s',nm)
             if len(gfname)==2:
                 cname = f'{gfname[0][0]} {gfname[1]}'
             elif len(gfname)==3:

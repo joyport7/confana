@@ -51,7 +51,7 @@ Kawakami Kazuya|Akiyama Yutaka|Nagao Tomoharu|Kobayashi Hirofumi|Sakumura Yuichi
         return jpname, jplink, jpaff, jpcite, numjp
     
     def convertgf(self,name):
-        nms = re.split('\s',name)
+        nms = re.split(r'\s',name)
         return nms[1] + ' ' + nms[0]
 
     def convertname(self,nms):
